@@ -1,0 +1,173 @@
+
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Tender</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+
+
+
+
+
+<!--    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"-->
+<!--          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">-->
+<!--    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>-->
+
+<!--    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"-->
+<!--            integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"-->
+<!--            crossorigin="anonymous"></script>-->
+<!--    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"-->
+<!--            integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"-->
+<!--            crossorigin="anonymous"></script>-->
+<!--    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"-->
+<!--            integrity="sha384-fbbOQedDUMZZ5KreZpsbe1LCZPVmfTnH7ois6mU1QK+m14rQ1l2bGBq41eYeM/fS"-->
+<!--            crossorigin="anonymous"></script>-->
+
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand m-3" href="#"> Tender.by</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+                aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="/search"> Поиск</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="#"> Тарифы</a>
+                </li>
+            </ul>
+            <p th:text="${user.organization.shortName}"></p> &nbsp;
+            <p th:text="${user.lastName}"></p> &nbsp;
+            <p th:text="${user.name}"></p>
+            <a class="btn btn-primary m-3" href="/homePage" role="button">Личный кабиент</a>
+            <a class="btn btn-secondary btn-sm m-3" href="/login" role="button">Выход</a>
+        </div>
+    </nav>
+<div class="container">
+    <div class="row" style="margin-top: 25px">
+        <h2> № <span th:text="${tender.id}"/></h2>
+        <h3><span th:text="${tender.subject}"/></h3>
+        <div th:if="${tender.victory != null}">
+            <h5 style="color: red"> Тендер завершен </h5>
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <div class="card-title"></div>
+                <div class="card-text">
+                    <table class="table table-bordered table-striped">
+                        <tbody>
+                        <tr>
+                            <td>Краткое описание</td>
+                            <td>
+                                <span th:text="${tender.shortDescription}"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Организатор</td>
+                            <td>
+                                <span th:text="${tender.organizationTenders.shortName}"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Единицы измерения</td>
+                            <td>
+                                <span th:text="${tender.unitOfMeasurement}"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Количество единиц</td>
+                            <td>
+                                <span th:text="${tender.amount}"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Цена за единицу</td>
+                            <td>
+                                <span th:text="${tender.unitPrice}"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Общая стоимость закупки</td>
+                            <td>
+                                <span th:text="${tender.totalCost}"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Вид валюты</td>
+                            <td>
+                                <span th:text="${tender.valuta}"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Условия дставки</td>
+                            <td>
+                                <span th:text="${tender.deliveryConditions}"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Условия оплаты</td>
+                            <td>
+                                <span th:text="${tender.termsOfPayment}"/>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                        <div th:if="${@authContext.getOrganizationId() != tender.organizationTenders.id && tender.victory == null}">
+                            <form th:method="get"
+                                  action="#"
+                                  th:action="@{'/createApplication/{tenderId}'(tenderId=${tender.id})}">
+                                <button type="submit" class="btn btn-primary" name="button">Подать заявку
+                                </button>
+                            </form>
+                        </div>
+                    <div th:unless="${@authContext.getOrganizationId() != tender.organizationTenders.id}">
+                        <form th:method="get"
+                              action="#"
+                              th:action="@{'/considerApplications/{tenderId}'(tenderId=${tender.id})}">
+                            <button type="submit" class="btn btn-primary" name="button">Завершить и рассмотреть заявки
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <div class="card-title">Поступившие заявки: <span th:text="${count}"/></div>
+                <div class="card-text">
+                    <table class="table table-bordered table-striped">
+                        <tbody>
+                        <tr>
+                            <th>Участник</th>
+                            <th>Цена</th>
+                        </tr>
+                        <tbody>
+                        <tr th:each="applicatio: ${applications}">
+                            <td>
+                                <span th:text="${applicatio.organizationApplication.shortName}"/>
+                            </td>
+                            <td>
+                                <span th:text="${applicatio.totalCost}"/>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div th:if="${ tender.victory != null}">
+            <form th:method="get"
+                  action="#"
+                  th:action="@{'/victory/{tenderId}'(tenderId=${tender.id})}">
+                <button type="submit" class="btn btn-primary" name="button"> Итоги организатора
+                </button>
+            </form>
+        </div>
+        <div  th:unless="${tender.victory == null}"></div>
+    </div>
+</div>
+</body>
+</html>
