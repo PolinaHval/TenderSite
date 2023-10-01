@@ -45,6 +45,17 @@
                                 </div>
                             </div>
                             <div class="form-group row">
+                                <label class="col-sm-3 col-form-label" for="passwordMatches">Повторите пароль</label>
+                                <div class="col-sm-3">
+                                    <input class="col-form-label form-control" type="password" id="passwordMatches"
+                                           th:filed="*{passwordMatches}" name="passwordMatches" placeholder="Повторите парооль"/>
+                                </div>
+                                <div class="col-sm-6">
+                                    <p th:if="${#fields.hasErrors('passwordMatches')}" style="color: red">Поле не может быть
+                                        пустым</p>
+                                </div>
+                            </div>
+                            <div class="form-group row">
                                 <label class="col-sm-3 col-form-label" for="name">Имя</label>
                                 <div class="col-sm-3">
                                     <input class="col-form-label form-control" id="name" th:filed="*{name}"

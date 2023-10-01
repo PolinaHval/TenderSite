@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.teachmeskills.dto.CreateTenderDto;
 import org.teachmeskills.model.Organization;
 import org.teachmeskills.model.Tender;
+import org.teachmeskills.model.Victory;
 import org.teachmeskills.repository.TenderRepository;
 
 import java.util.List;
@@ -55,9 +56,5 @@ public class TenderService {
 
   public void deleteTender(Tender tender) {
     tenderRepository.delete(tender);
-  }
-
-  public List<Tender> getListTendersArchive(long organizationId) {
-    return organizationService.findOrganizationById(organizationId).orElseThrow().getTenders();
   }
 }
