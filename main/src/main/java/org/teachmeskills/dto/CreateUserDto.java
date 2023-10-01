@@ -2,6 +2,7 @@ package org.teachmeskills.dto;
 
 
 import lombok.Data;
+import org.teachmeskills.validation.PasswordMatches;
 import org.teachmeskills.validation.ValidEmail;
 
 import javax.validation.constraints.NotEmpty;
@@ -9,6 +10,7 @@ import javax.validation.constraints.NotNull;
 
 
 @Data
+@PasswordMatches
 public class CreateUserDto {
 
   @NotEmpty(message = "Поле не может быть пустым")
@@ -16,6 +18,7 @@ public class CreateUserDto {
 
   @NotEmpty(message = "Поле не может быть пустым")
   private String password;
+  private String passwordMatches;
 
   @NotEmpty(message = "Поле не может быть пустым")
   private String lastName;
@@ -30,7 +33,7 @@ public class CreateUserDto {
   private int phone;
 
   @NotEmpty(message = "Поле не может быть пустым")
-  private String login;
+  private String username;
 
   @NotEmpty(message = "Поле не может быть пустым")
   private String jobTitle;

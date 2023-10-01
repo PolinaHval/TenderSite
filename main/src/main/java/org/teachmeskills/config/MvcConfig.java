@@ -7,12 +7,9 @@ import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.handler.MappedInterceptor;
-import org.teachmeskills.interceptor.AuthInterceptor;
-import org.teachmeskills.session.AuthContext;
 import org.teachmeskills.validation.EmailValidator;
 import org.thymeleaf.dialect.IDialect;
 import org.thymeleaf.extras.java8time.dialect.Java8TimeDialect;
-
 
 import java.util.List;
 
@@ -21,9 +18,9 @@ import java.util.List;
 @RequiredArgsConstructor
 public class MvcConfig implements WebMvcConfigurer {
 
-  private final AuthContext authContext;
-
-  private static final List<String> ALLOWED_PATHS = List.of("/login", "/regOrganization", "/main", "/search");
+//  private final AuthContext authContext;
+//
+//  private static final List<String> ALLOWED_PATHS = List.of("/login", "/regOrganization", "/app", "/search");
 
   @Override
   public void addViewControllers(ViewControllerRegistry registry) {
@@ -44,14 +41,14 @@ public class MvcConfig implements WebMvcConfigurer {
     registry.addViewController("/myApplications").setViewName("myApplications");
     registry.addViewController("/considerApplications").setViewName("considerApplications");
     registry.addViewController("/victory").setViewName("victory");
-    registry.addViewController("/main").setViewName("main");
+    registry.addViewController("/app").setViewName("app");
   }
 
-  @Override
-  public void addInterceptors(InterceptorRegistry registry) {
-    registry.addInterceptor(new MappedInterceptor(new String[]{"/*"},
-        new AuthInterceptor(authContext))).excludePathPatterns(ALLOWED_PATHS);
-  }
+//  @Override
+//  public void addInterceptors(InterceptorRegistry registry) {
+//    registry.addInterceptor(new MappedInterceptor(new String[]{"/*"},
+//        new AuthInterceptor(authContext))).excludePathPatterns(ALLOWED_PATHS);
+//  }
 
   @Bean
   public IDialect conditionalCommentDialect() {

@@ -5,19 +5,11 @@
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand m-3" href="#"> Tender.by</a>
+    <p class="navbar-brand m-3"> Tender.by</p>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
             aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-            <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#"> Тарифы</a>
-            </li>
-        </ul>
-        <a class="btn btn-outline-primary m-3" href="/login" role="button">Войти</a>
-    </div>
 </nav>
 <div class="container">
     <div class="row" style="margin-top: 25px">
@@ -30,21 +22,21 @@
                 </div>
                 <div class="card-body">
                     <div class="card-title">
-                        <h3>Пользователь</h3>
+                        <h3>Пользователь организации </h3>
                     </div>
                     <div class="card-text">
                         <form method="POST"
                               action="#"
-                              th:action="@{/registration}"
+                              th:action="@{'/registration/{organizationId}'(organizationId=${organization.id})}"
                               th:object="${createUserDto}">
                             <div class="form-group row">
-                                <label class="col-sm-3 col-form-label" for="login">Логин</label>
+                                <label class="col-sm-3 col-form-label" for="username">Логин</label>
                                 <div class="col-sm-3">
-                                    <input class="col-form-label form-control" id="login" name="login"
-                                           th:field="*{login}" placeholder="Логин">
+                                    <input class="col-form-label form-control" id="username" name="username"
+                                           th:field="*{username}" placeholder="Логин">
                                 </div>
                                 <div class="col-sm-6">
-                                    <p th:if="${#fields.hasErrors('login')}" style="color: red">Поле не может быть
+                                    <p th:if="${#fields.hasErrors('username')}" style="color: red">Поле не может быть
                                         пустым</p>
                                 </div>
                             </div>
@@ -56,6 +48,17 @@
                                 </div>
                                 <div class="col-sm-6">
                                     <p th:if="${#fields.hasErrors('password')}" style="color: red">Поле не может быть
+                                        пустым</p>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label" for="passwordMatches">Повторите пароль</label>
+                                <div class="col-sm-3">
+                                    <input class="col-form-label form-control" type="password" id="passwordMatches"
+                                           th:filed="*{passwordMatches}" name="passwordMatches" placeholder="Повторите парооль"/>
+                                </div>
+                                <div class="col-sm-6">
+                                    <p th:if="${#fields.hasErrors('passwordMatches')}" style="color: red">Поле не может быть
                                         пустым</p>
                                 </div>
                             </div>
