@@ -2,7 +2,9 @@ package org.teachmeskills.service;
 
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
+import org.teachmeskills.dto.AppUserDto;
 import org.teachmeskills.dto.CreateUserDto;
 import org.teachmeskills.error.UserAlreadyExistException;
 import org.teachmeskills.model.Organization;
@@ -35,14 +37,14 @@ public class UserService {
       throw new UserAlreadyExistException(" Пользователь с указанной почтой существует");
     }
     final Role role = roleService.getRoleByName(userDto.getRole());
-    final User user = new User(userDto.getLogin(), hashingPassword(userDto.getPassword()), userDto.getName(),
+    final User user = new User(userDto.getUsername(), hashingPassword(userDto.getPassword()), userDto.getName(),
         userDto.getLastName(), userDto.getPatronymic(), userDto.getEmail(), userDto.getPhone(), userDto.getJobTitle(),
         organization, role);
     return userRepository.save(user);
   }
 
-  public Optional<User> findUser(String login) {
-    return userRepository.findByLogin(login);
+  public Optional<User> findUser(String username) {
+    return userRepository.findByUsername(username);
   }
 
 
@@ -56,5 +58,9 @@ public class UserService {
 
   public void deleteUser(User user) {
     userRepository.delete(user);
+  }
+
+  public User getUserLogin(String username) {
+   return userRepository.getUserByUsername(username);
   }
 }

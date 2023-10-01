@@ -14,7 +14,7 @@ import lombok.Value;
 public class AppUserDto {
 
   long id;
-  String login;
+  String username;
   String password;
   String role;
 }

@@ -45,4 +45,8 @@ public class OrganizationService {
     return organizationRepository.findByUnp(unp);
   }
 
+  public Organization findOrganizationByUnp(int unp) {
+    return organizationRepository.getByUnp(unp);
+  }
+
 }

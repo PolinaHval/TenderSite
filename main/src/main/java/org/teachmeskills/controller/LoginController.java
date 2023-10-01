@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.teachmeskills.dto.UserDto;
 import org.teachmeskills.model.User;
 import org.teachmeskills.service.UserService;
-import org.teachmeskills.session.AuthContext;
+//import org.teachmeskills.session.AuthContext;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
@@ -25,7 +25,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class LoginController {
 
-  private final AuthContext authContext;
+
   private final UserService userService;
 
   @GetMapping
@@ -37,19 +37,17 @@ public class LoginController {
   @PostMapping(consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
   protected String loginUser (@ModelAttribute("userDto") @Valid final UserDto userDto, final BindingResult result,
                               HttpServletResponse response) throws IOException {
-    final String login = userDto.getLogin();
+    final String username = userDto.getUsername();
     final String password = userDto.getPassword();
-    Optional<User> user = userService.findUser(login);
+    Optional<User> user = userService.findUser(username);
     if (!result.hasErrors() && user.isPresent() && userService.validatePassword(password, user.get().getPassword())) {
-      authContext.setLoggedInUserId(user.get().getId());
-      authContext.setOrganizationId(user.get().getOrganization().getId());
+      return "redirect:/homePage";
     } else {
       response.setCharacterEncoding("utf-8");
       final PrintWriter out = response.getWriter();
       out.println(" Логин или пароль введены неверно");
       return "login";
     }
-    return "redirect:/homePage";
   }
 
 

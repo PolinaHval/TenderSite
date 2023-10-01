@@ -71,8 +71,7 @@
                                 <span th:text="${user.role.name}"/>
                             </td>
                             <td class="col-1">
-<!--                                th:if="${@authContext.getLoggedInUserId() != user.id}"-->
-                                <div>
+                                <div th:if="${@authContext.getLoggedInUserId() != user.id}">
                                     <form th:method="delete"
                                           action="#"
                                           th:action="@{'/users/{id}'(id=${user.id})}">

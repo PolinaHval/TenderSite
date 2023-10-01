@@ -5,7 +5,7 @@
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand m-3" href="#"> Tender.by</a>
+    <a class="navbar-brand m-3" href="/app"> Tender.by</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
             aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -32,12 +32,12 @@
                 <div class="card-text">
                     <form method="POST" action="#" th:action="@{/login}" th:object="${userDto}">
                         <div class="form-group row">
-                            <label class="col-sm-3 col-form-label" for="login">Логин</label>
+                            <label class="col-sm-3 col-form-label" for="username">Логин</label>
                             <div class="col-sm-4">
-                                <input class="col-form-label form-control" id="login" th:filed="*{login}" name="login"
+                                <input class="col-form-label form-control" id="username" th:filed="*{username}" name="username"
                                        placeholder="Логин">
                                 <div class="col-sm-7">
-                                    <p th:if="${#fields.hasErrors('login')}" style="color: red">Поле не может быть
+                                    <p th:if="${#fields.hasErrors('username')}" style="color: red">Поле не может быть
                                         пустым</p>
                                 </div>
                             </div>
