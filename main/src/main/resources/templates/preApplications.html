@@ -1,0 +1,57 @@
+<html  xmlns:th="http://www.thymeleaf.org">
+<head>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+  <title>PreApplications</title>
+</head>
+<body>
+<div th:insert="fragments/header.html :: header"/>
+<div class="container">
+  <div class="row" style="margin-top: 25px">
+    <div class="card">
+      <div class="card-body">
+        <div class="card-title">
+          <h3>Предзаявки на регистрацию</h3>
+        </div>
+        <div class="card-text">
+          <table class="table">
+            <tr>
+              <th>УНП</th>
+              <th>Полное наименование</th>
+              <th>Краткое наименование</th>
+              <th>Юридический адрес</th>
+              <th>Фактический адрес</th>
+            </tr>
+            <tbody>
+            <tr th:each="organization:${organizations}">
+              <td>
+                <span th:text="${organization.unp}"/>
+              </td>
+              <td>
+                <span th:text="${organization.fullName}"/>
+              </td>
+              <td>
+                <span th:text="${organization.shortName}"/>
+              </td>
+              <td>
+                <span th:text="${organization.actualAddress}"/>
+              </td>
+              <td>
+                <span th:text="${organization.legalAddress}"/>
+              </td>
+              <td class="col-1">
+                  <form th:method="delete"
+                        action="#"
+                        th:action="@{'/preApplications/{organizationId}'(organizationId=${organization.id})}">
+                    <button type="submit" class="btn btn-primary" name="button">Удалить</button>
+                  </form>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

@@ -54,5 +54,4 @@ public class Organization {
 
   @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "victoryOrganization")
   private List<Victory> victories;
-
 }

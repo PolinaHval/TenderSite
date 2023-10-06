@@ -7,8 +7,8 @@ CREATE TABLE users
     password        VARCHAR   NOT NULL,
     name            VARCHAR   NOT NULL,
     email           VARCHAR   NOT NULL UNIQUE,
-    last_Name       VARCHAR   NOT NULL,
+    last_name       VARCHAR   NOT NULL,
     patronymic      VARCHAR   NOT NULL,
     phone           VARCHAR   NOT NULL,
-    job_Title       VARCHAR   NOT NULL
+    job_title       VARCHAR   NOT NULL
 );

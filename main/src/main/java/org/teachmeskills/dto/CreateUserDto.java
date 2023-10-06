@@ -29,8 +29,8 @@ public class CreateUserDto {
   @NotEmpty(message = "Поле не может быть пустым")
   private String email;
 
-  @NotNull(message = "Поле не может быть пустым")
-  private int phone;
+  @NotEmpty(message = "Поле не может быть пустым")
+  private String phone;
 
   @NotEmpty(message = "Поле не может быть пустым")
   private String username;

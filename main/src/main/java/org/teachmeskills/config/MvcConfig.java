@@ -3,28 +3,19 @@ package org.teachmeskills.config;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-import org.springframework.web.servlet.handler.MappedInterceptor;
 import org.teachmeskills.validation.EmailValidator;
 import org.thymeleaf.dialect.IDialect;
 import org.thymeleaf.extras.java8time.dialect.Java8TimeDialect;
-
-import java.util.List;
 
 
 @Configuration
 @RequiredArgsConstructor
 public class MvcConfig implements WebMvcConfigurer {
 
-//  private final AuthContext authContext;
-//
-//  private static final List<String> ALLOWED_PATHS = List.of("/login", "/regOrganization", "/app", "/search");
-
   @Override
   public void addViewControllers(ViewControllerRegistry registry) {
-    registry.addViewController("/accessDenied").setViewName("accessDenied");
     registry.addViewController("/login").setViewName("login");
     registry.addViewController("/registration").setViewName("registration");
     registry.addViewController("/regOrganization").setViewName("regOrganization");
@@ -42,13 +33,11 @@ public class MvcConfig implements WebMvcConfigurer {
     registry.addViewController("/considerApplications").setViewName("considerApplications");
     registry.addViewController("/victory").setViewName("victory");
     registry.addViewController("/app").setViewName("app");
+    registry.addViewController("/organizationExists").setViewName("organizationExists");
+    registry.addViewController("/userExists").setViewName("userExists");
+    registry.addViewController("/userNameExists").setViewName("userNameExists");
+    registry.addViewController("/preApplications").setViewName("preApplications");
   }
-
-//  @Override
-//  public void addInterceptors(InterceptorRegistry registry) {
-//    registry.addInterceptor(new MappedInterceptor(new String[]{"/*"},
-//        new AuthInterceptor(authContext))).excludePathPatterns(ALLOWED_PATHS);
-//  }
 
   @Bean
   public IDialect conditionalCommentDialect() {
@@ -59,5 +48,5 @@ public class MvcConfig implements WebMvcConfigurer {
   public EmailValidator usernameValidator() {
     return new EmailValidator();
   }
-}
 
+}

@@ -3,6 +3,7 @@ package org.teachmeskills.config.service;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.teachmeskills.model.Organization;
+import org.teachmeskills.model.Role;
 
 import java.util.Collection;
 
@@ -14,12 +15,14 @@ public class MyUser extends User {
   private final String patronymic;
   private final String email;
   private final String jobTitle;
-  private final int phone;
+  private final String phone;
+  private final long id;
+  private final Role role;
 
 
   public MyUser(String username, String password, Collection<? extends GrantedAuthority> authorities,
                 Organization organization, String name, String lastName, String patronymic,
-                String email, String jobTitle, int phone) {
+                String email, String jobTitle, String phone, long id, Role role) {
     super(username, password, authorities);
     this.organization = organization;
     this.name = name;
@@ -28,6 +31,16 @@ public class MyUser extends User {
     this.email = email;
     this.jobTitle = jobTitle;
     this.phone = phone;
+    this.id = id;
+    this.role = role;
+  }
+
+  public Role getRole() {
+    return role;
+  }
+
+  public long getId() {
+    return id;
   }
 
   public Organization getOrganization() {
@@ -42,7 +55,6 @@ public class MyUser extends User {
     return lastName;
   }
 
-
   public String getPatronymic() {
     return patronymic;
   }
@@ -55,7 +67,7 @@ public class MyUser extends User {
     return jobTitle;
   }
 
-  public int getPhone() {
+  public String getPhone() {
     return phone;
   }
 }

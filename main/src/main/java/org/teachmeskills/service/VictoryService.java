@@ -14,12 +14,10 @@ public class VictoryService {
 
   private final VictoryRepository victoryRepository;
 
-
   public void createVictory(Organization organization, Tender tender) {
 
     final Victory victory = Victory.builder().victoryOrganization(organization).victoryTender(tender).build();
     victoryRepository.save(victory);
   }
-
 
 }

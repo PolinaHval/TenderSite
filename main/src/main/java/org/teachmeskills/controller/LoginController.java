@@ -25,7 +25,6 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class LoginController {
 
-
   private final UserService userService;
 
   @GetMapping
@@ -49,7 +48,6 @@ public class LoginController {
       return "login";
     }
   }
-
 
 }
 

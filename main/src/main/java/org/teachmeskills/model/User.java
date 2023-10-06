@@ -9,6 +9,7 @@ import lombok.experimental.NonFinal;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -49,7 +50,7 @@ public class User {
   String email;
 
   @Column(name = "phone")
-  int phone;
+  String phone;
 
   @Column(name = "job_Title")
   String jobTitle;
@@ -58,12 +59,12 @@ public class User {
   @JoinColumn(name = "organization_Id", nullable = false)
   public Organization organization;
 
-  @ManyToOne
-  @JoinColumn(name = "role_id", nullable = false)
+  @ManyToOne(fetch = FetchType.EAGER)
+  @JoinColumn(name = "role_Id", nullable = false)
   public Role role;
 
 
-  public User(String username, String password, String name, String lastName, String patronymic, String email, int phone,
+  public User(String username, String password, String name, String lastName, String patronymic, String email, String phone,
               String jobTitle, Organization organization, Role role) {
     this.username = username;
     this.password = password;

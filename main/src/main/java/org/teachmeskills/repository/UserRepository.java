@@ -2,9 +2,7 @@ package org.teachmeskills.repository;
 
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Repository;
-import org.teachmeskills.dto.AppUserDto;
 import org.teachmeskills.model.User;
 
 import java.util.Optional;

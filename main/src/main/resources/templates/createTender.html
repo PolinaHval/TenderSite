@@ -1,4 +1,4 @@
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <title>Create Tender</title>
@@ -8,31 +8,7 @@
 
 </head>
 <body>
-<div th:fragment="pages">
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <p class="navbar-brand m-3"> Tender.by</p>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
-                aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="/search"> Поиск</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#"> Тарифы</a>
-                </li>
-            </ul>
-            <p th:text="${user.organization.shortName}"></p> &nbsp;
-            <p th:text="${user.lastName}"></p> &nbsp;
-            <p th:text="${user.name}"></p>
-            <a class="btn btn-primary m-3" href="/homePage" role="button">Личный кабиент</a>
-            <a class="btn btn-secondary btn-sm m-3" href="/login" role="button">Выход</a>
-        </div>
-    </nav>
-</div>
-
+<div th:insert="fragments/header.html :: header"/>
 <div class="container">
     <div class="row" style="margin-top: 25px">
         <div class="card">
@@ -55,15 +31,13 @@
                                            th:field="*{subject}">
                                 </div>
                                 <div class="col-sm-6">
-                                    <p th:if="${#fields.hasErrors('subject')}" style="color: red">Поле не может быть
-                                        пустым</p>
+                                    <p th:if="${#fields.hasErrors('subject')}" style="color: red">Поле заполнено некорректно</p>
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label class="col-sm-3 col-form-label" for="shortDescription">Краткое описание</label>
                                 <div class="col-sm-3">
-                                    <input class="col-form-label form-control" type="shortDescription"
-                                           id="shortDescription"
+                                    <input class="col-form-label form-control" id="shortDescription"
                                            th:filed="*{shortDescription}" name="shortDescription"/>
                                 </div>
                             </div>
@@ -75,9 +49,7 @@
                                            th:field="*{unitOfMeasurement}">
                                 </div>
                                 <div class="col-sm-6">
-                                    <p th:if="${#fields.hasErrors('unitOfMeasurement')}" style="color: red">Поле не
-                                        может быть
-                                        пустым</p>
+                                    <p th:if="${#fields.hasErrors('unitOfMeasurement')}" style="color: red">Поле заполнено некорректно</p>
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -88,9 +60,7 @@
                                            th:field="*{amount}">
                                 </div>
                                 <div class="col-sm-6">
-                                    <p th:if="${#fields.hasErrors('amount')}" style="color: red">Поле не
-                                        может быть
-                                        пустым</p>
+                                    <p th:if="${#fields.hasErrors('amount')}" style="color: red">Поле заполнено некорректно</p>
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -112,9 +82,7 @@
                                            th:field="*{unitPrice}">
                                 </div>
                                 <div class="col-sm-6">
-                                    <p th:if="${#fields.hasErrors('unitPrice')}" style="color: red">Поле не
-                                        может быть
-                                        пустым</p>
+                                    <p th:if="${#fields.hasErrors('unitPrice')}" style="color: red">Поле заполнено некорректно</p>
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -125,9 +93,7 @@
                                            th:field="*{totalCost}">
                                 </div>
                                 <div class="col-sm-6">
-                                    <p th:if="${#fields.hasErrors('totalCost')}" style="color: red">Поле не
-                                        может быть
-                                        пустым</p>
+                                    <p th:if="${#fields.hasErrors('totalCost')}" style="color: red">Поле заполнено некорректно</p>
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -138,8 +104,7 @@
                                            name="termsOfPayment">
                                 </div>
                                 <div class="col-sm-6">
-                                    <p th:if="${#fields.hasErrors('termsOfPayment')}" style="color: red">Поле не может
-                                        быть пустым</p>
+                                    <p th:if="${#fields.hasErrors('termsOfPayment')}" style="color: red">Поле заполнено некорректно</p>
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -150,9 +115,7 @@
                                            th:filed="*{deliveryConditions}" name="deliveryConditions">
                                 </div>
                                 <div class="col-sm-6">
-                                    <p th:if="${#fields.hasErrors('deliveryConditions')}" style="color: red">Поле не
-                                        может быть
-                                        пустым</p>
+                                    <p th:if="${#fields.hasErrors('deliveryConditions')}" style="color: red">Поле заполнено некорректно</p>
                                 </div>
                             </div>
                             <button type="submit" class="btn btn-primary">Создать</button>

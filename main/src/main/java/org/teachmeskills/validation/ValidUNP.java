@@ -13,12 +13,11 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 @Target({TYPE, FIELD, ANNOTATION_TYPE})
 @Retention(RUNTIME)
-@Constraint(validatedBy = EmailValidator.class)
+@Constraint(validatedBy = UNPValidator.class)
 @Documented
-public @interface ValidEmail {
-  String message() default "Неккоректно указана почта";
+public @interface ValidUNP {
 
+  String message() default "УНП должно содержать 9 цифр";
   Class<?>[] groups() default {};
-
   Class<? extends Payload>[] payload() default {};
 }

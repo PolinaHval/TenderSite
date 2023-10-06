@@ -4,6 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.NonFinal;
+import net.bytebuddy.jar.asm.commons.Remapper;
+import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -22,7 +24,7 @@ import java.util.List;
 @Entity
 @Table(name = "roles")
 @AllArgsConstructor
-public class Role {
+public class Role  {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,6 +33,6 @@ public class Role {
   @Column(name = "role")
   String name;
 
-  @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "role")
-  private List<User> users;
+//  @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "role")
+//  private List<User> users;
 }

@@ -4,6 +4,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import org.teachmeskills.model.Organization;
 
+import java.util.List;
 import java.util.Optional;
 @Repository
 public interface OrganizationRepository extends JpaRepository<Organization, Integer> {
@@ -15,4 +16,6 @@ public interface OrganizationRepository extends JpaRepository<Organization, Inte
   Organization getOrganizationById(long organizationId);
 
  Organization getByUnp(int unp);
+
+ List<Organization> findOrganizationsByUsersIsNull();
 }

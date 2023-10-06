@@ -35,10 +35,9 @@
                                     <input class="col-form-label form-control" id="username" name="username"
                                            th:field="*{username}" placeholder="Логин">
                                 </div>
-                                <div class="col-sm-6">
-                                    <p th:if="${#fields.hasErrors('username')}" style="color: red">Поле не может быть
-                                        пустым</p>
-                                </div>
+                                <ul class="col-sm-6">
+                                    <li th:each="err : ${#fields.errors('username')}"  style="color: red" th:text="${err}" class="error" />
+                                </ul>
                             </div>
                             <div class="form-group row">
                                 <label class="col-sm-3 col-form-label" for="password">Пароль</label>
@@ -46,10 +45,9 @@
                                     <input class="col-form-label form-control" type="password" id="password"
                                            th:filed="*{password}" name="password" placeholder="Пароль"/>
                                 </div>
-                                <div class="col-sm-6">
-                                    <p th:if="${#fields.hasErrors('password')}" style="color: red">Поле не может быть
-                                        пустым</p>
-                                </div>
+                                <ul class="col-sm-6">
+                                    <li th:each="err : ${#fields.errors('password')}"  style="color: red" th:text="${err}" class="error" />
+                                </ul>
                             </div>
                             <div class="form-group row">
                                 <label class="col-sm-3 col-form-label" for="passwordMatches">Повторите пароль</label>
@@ -57,10 +55,9 @@
                                     <input class="col-form-label form-control" type="password" id="passwordMatches"
                                            th:filed="*{passwordMatches}" name="passwordMatches" placeholder="Повторите парооль"/>
                                 </div>
-                                <div class="col-sm-6">
-                                    <p th:if="${#fields.hasErrors('passwordMatches')}" style="color: red">Поле не может быть
-                                        пустым</p>
-                                </div>
+                                <ul class="col-sm-6">
+                                    <li th:each="err : ${#fields.errors('passwordMatches')}"  style="color: red" th:text="${err}" class="error" />
+                                </ul>
                             </div>
                             <div class="form-group row">
                                 <label class="col-sm-3 col-form-label" for="name">Имя</label>
@@ -68,10 +65,9 @@
                                     <input class="col-form-label form-control" id="name" th:filed="*{name}"
                                            name="name" placeholder="Имя">
                                 </div>
-                                <div class="col-sm-6">
-                                    <p th:if="${#fields.hasErrors('name')}" style="color: red">Поле не может быть
-                                        пустым</p>
-                                </div>
+                                <ul class="col-sm-6">
+                                    <li th:each="err : ${#fields.errors('name')}"  style="color: red" th:text="${err}" class="error" />
+                                </ul>
                             </div>
                             <div class="form-group row">
                                 <label class="col-sm-3 col-form-label" for="lastName">Фамилия</label>
@@ -79,10 +75,9 @@
                                     <input class="col-form-label form-control" id="lastName" th:filed="*{lastName}"
                                            name="lastName" placeholder="Фамилия">
                                 </div>
-                                <div class="col-sm-6">
-                                    <p th:if="${#fields.hasErrors('lastName')}" style="color: red">Поле не может быть
-                                        пустым</p>
-                                </div>
+                                <ul class="col-sm-6">
+                                    <li th:each="err : ${#fields.errors('lastName')}"  style="color: red" th:text="${err}" class="error" />
+                                </ul>
                             </div>
                             <div class="form-group row">
                                 <label class="col-sm-3 col-form-label" for="patronymic">Отчество</label>
@@ -90,10 +85,9 @@
                                     <input class="col-form-label form-control" id="patronymic" th:filed="*{patronymic}"
                                            name="patronymic" placeholder="Отчество">
                                 </div>
-                                <div class="col-sm-6">
-                                    <p th:if="${#fields.hasErrors('patronymic')}" style="color: red">Поле не может быть
-                                        пустым</p>
-                                </div>
+                                <ul class="col-sm-6">
+                                    <li th:each="err : ${#fields.errors('patronymic')}"  style="color: red" th:text="${err}" class="error" />
+                                </ul>
                             </div>
                             <div class="form-group row">
                                 <label class="col-sm-3 col-form-label" for="email">Email</label>
@@ -101,21 +95,19 @@
                                     <input class="col-form-label form-control" type="email" id="email"
                                            th:filed="*{email}" name="email" placeholder="Адрес электронной почты">
                                 </div>
-                                <div class="col-sm-6">
-                                    <p th:if="${#fields.hasErrors('email')}" style="color: red">Поле не может быть
-                                        пустым</p>
-                                </div>
+                                <ul class="col-sm-6">
+                                    <li th:each="err : ${#fields.errors('email')}"  style="color: red" th:text="${err}" class="error" />
+                                </ul>
                             </div>
                             <div class="form-group row">
                                 <label class="col-sm-3 col-form-label" for="phone">Номер телефона</label>
                                 <div class="col-sm-3">
-                                    <input class="col-form-label form-control" id="phone"
+                                    <input class="col-form-label form-control"  id="phone"
                                            th:filed="*{phone}" name="phone" placeholder="Номер телефона">
                                 </div>
-                                <div class="col-sm-6">
-                                    <p th:if="${#fields.hasErrors('phone')}" style="color: red">Поле не может быть
-                                        пустым</p>
-                                </div>
+                                <ul class="col-sm-6">
+                                    <li th:each="err : ${#fields.errors('phone')}"  style="color: red" th:text="${err}" class="error" />
+                                </ul>
                             </div>
                             <div class="form-group row">
                                 <label class="col-sm-3 col-form-label" for="jobTitle">Должность</label>
@@ -123,10 +115,9 @@
                                     <input class="col-form-label form-control" id="jobTitle" th:filed="*{jobTitle}"
                                            name="jobTitle" placeholder="Должность">
                                 </div>
-                                <div class="col-sm-6">
-                                    <p th:if="${#fields.hasErrors('jobTitle')}" style="color: red">Поле не может быть
-                                        пустым</p>
-                                </div>
+                                <ul class="col-sm-6">
+                                    <li th:each="err : ${#fields.errors('jobTitle')}"  style="color: red" th:text="${err}" class="error" />
+                                </ul>
                             </div>
                             <div class="form-group row">
                                 <label class="col-sm-3 col-form-label" for="role">Права пользователя</label>

@@ -6,49 +6,16 @@
 
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <p class="navbar-brand m-3"> Tender.by</p>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
-          aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-      <li class="nav-item">
-        <a class="nav-link active" aria-current="page" href="/search"> Поиск</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link active" aria-current="page" href="#"> Тарифы</a>
-      </li>
-    </ul>
-    <a class="btn btn-primary m-3" href="/homePage" role="button">Личный кабиент</a>
-    <a class="btn btn-secondary btn-sm m-3" href="/login" role="button">Выход</a>
-  </div>
-</nav>
-<div class="container">
-  <div class="row" style="margin-top: 25px">
+<div th:insert="fragments/header.html :: header"/>
+<div class="row m-4">
+  <div class="col-sm-5">
     <div class="card">
       <div class="card-body">
-        <div class="card-title"></div>
-        <div class="card-text">
-          <table class="table table-bordered table-striped">
-            <tbody>
-            <tr>
-              <th>Победитель</th>
-            </tr>
-            <tbody>
-            <tr>
-              <td>
-                <span th:text="${victory.victoryOrganization.shortName}"/>
-              </td>
-            </tr>
-            </tbody>
-          </table>
-        </div>
+        <h5 class="card-title">Организатор выбрал победителя</h5>
+        <span th:text="${victory.victoryOrganization.shortName}"/>
       </div>
     </div>
   </div>
-</div>
 </body>
 </html>
 
