@@ -32,11 +32,11 @@ public class MvcConfig implements WebMvcConfigurer {
     registry.addViewController("/myApplications").setViewName("myApplications");
     registry.addViewController("/considerApplications").setViewName("considerApplications");
     registry.addViewController("/victory").setViewName("victory");
-    registry.addViewController("/app").setViewName("app");
-    registry.addViewController("/organizationExists").setViewName("organizationExists");
-    registry.addViewController("/userExists").setViewName("userExists");
-    registry.addViewController("/userNameExists").setViewName("userNameExists");
-    registry.addViewController("/preApplications").setViewName("preApplications");
+    registry.addViewController("/admin/operatorWorkplace").setViewName("operatorWorkplace");
+    registry.addViewController("/admin/preApplications").setViewName("preApplications");
+    registry.addViewController("/admin/allUsers").setViewName("allUsers");
+    registry.addViewController("/admin/allOrganizations").setViewName("allOrganizations");
+    registry.addViewController("/updateUser").setViewName("updateUser");
   }
 
   @Bean

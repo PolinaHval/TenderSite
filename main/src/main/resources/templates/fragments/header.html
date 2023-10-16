@@ -19,6 +19,9 @@
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="#"> Тарифы</a>
         </li>
+        <li class="nav-item">
+          <a sec:authorize="hasRole('admin')" class="nav-item nav-link active" href="/admin/operatorWorkplace">РМO</a>
+        </li>
       </ul>
       <div sec:authorize="isAuthenticated()">
         <div style="display: inline-block;" sec:authentication="principal.organization.shortName"></div> &nbsp;

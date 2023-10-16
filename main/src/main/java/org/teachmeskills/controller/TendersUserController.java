@@ -29,7 +29,7 @@ public class TendersUserController {
   }
 
   @DeleteMapping("/{tenderId}")
-  protected String deleteUser(@PathVariable("tenderId") int tenderId) {
+  protected String deleteTender(@PathVariable("tenderId") int tenderId) {
     Tender tender = tenderService.getTenderById(tenderId);
     tenderService.deleteTender(tender);
     return "redirect:/myTenders";

@@ -7,3 +7,5 @@ CREATE TABLE organizations
     legal_address  VARCHAR   NOT NULL,
     actual_address VARCHAR   NOT NULL
 );
+INSERT INTO organizations (unp, full_name, short_name, legal_address, actual_address)
+VALUES (111111111, 'Общество с ограниченной ответственностью "Tander"','OOO "Tander"', 'г. Минск', 'г. Минск');

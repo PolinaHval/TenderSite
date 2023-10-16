@@ -1,28 +1,25 @@
 package org.teachmeskills.dto;
 
 import lombok.Data;
-import org.teachmeskills.validation.ValidUNP;
 
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
+
 
 @Data
-public class CreateOrganizationDto {
-
-  @ValidUNP
-  @NotNull (message = "Поле не может быть пустым")
-  private Integer unp;
+public class UpdateUserDto {
 
   @NotEmpty(message = "Поле не может быть пустым")
-  private String fullName;
+  private String name;
 
   @NotEmpty(message = "Поле не может быть пустым")
-  private String shortName;
+  private String lastName;
+
+  private String patronymic;
 
   @NotEmpty(message = "Поле не может быть пустым")
-  private String legalAddress;
+  private String phone;
 
   @NotEmpty(message = "Поле не может быть пустым")
-  private String actualAddress;
+  private String jobTitle;
 
 }

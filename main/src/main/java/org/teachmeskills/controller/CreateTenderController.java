@@ -42,5 +42,4 @@ public class CreateTenderController {
     }
     return "redirect:/myTenders";
   }
-
 }

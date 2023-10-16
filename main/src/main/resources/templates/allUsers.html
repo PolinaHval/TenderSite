@@ -1,0 +1,79 @@
+<html xmlns:th="http://www.thymeleaf.org" >
+<head>
+  <title>Users</title>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+</head>
+<body>
+<div th:insert="fragments/header.html :: header"/>
+<div class="container">
+  <div class="row" style="margin-top: 25px">
+    <div class="card">
+      <div class="card-body">
+        <div class="card-title">
+          <h3>Пльзователи</h3>
+        </div>
+        <div class="card-text">
+          <table class="table">
+            <tr>
+              <th>№</th>
+              <th>Логин</th>
+              <th>Ф.И.О.</th>
+              <th>Права пользователя<th>
+              <th>Организация<th>
+            </tr>
+            <tbody>
+            <tr th:each="user : ${listUsers}">
+              <td>
+                <span th:text="${user.id}"/>
+              </td>
+              <td>
+                <span th:text="${user.username}"/>
+              </td>
+              <td>
+                <span th:text="${user.lastName}"/>
+                <span th:text="${user.name}"/>
+                <span th:text="${user.patronymic}"/>
+              </td>
+              <td>
+                <span th:text="${user.role.name}"/>
+              </td>
+              <td  class="col-1">
+                <span th:text="${user.organization.shortName}"/>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+
+          <div th:if="${totalPages > 1}">
+            <div class="row col-sm-10">
+              <div class="col-sm-2">
+                Total Rows: [[${totalItems}]]
+              </div>
+              <div class="col-sm-2">
+                <span th:each="i: ${#numbers.sequence(1, totalPages)}">
+                  <a th:if="${currentPage != i}"
+                     th:href="@{'/search?page=' + ${i} + '&pageSize=' + ${pageSize}}">[[${i}]]</a>
+                  <span th:unless="${currentPage != i}">[[${i}]]</span> &nbsp; &nbsp;
+                </span>
+              </div>
+              <div class="col-sm-1">
+                <a th:if="${currentPage < totalPages}"
+                   th:href="@{'/search?page=' + ${currentPage + 1} + '&pageSize=' + ${pageSize}}">Next</a>
+                <span th:unless="${currentPage < totalPages}">Next</span>
+              </div>
+
+              <div class="col-sm-1">
+                <a th:if="${currentPage < totalPages}"
+                   th:href="@{'/search?page=' + ${totalPages} + '&pageSize=' + ${pageSize}}">Last</a>
+                <span th:unless="${currentPage < totalPages}">Last</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

@@ -80,7 +80,7 @@
                                 <form th:method="get"
                                       action="#"
                                       th:action="@{'/createApplication/{tenderId}'(tenderId=${tender.id})}">
-                                    <button type="submit" class="btn btn-primary" name="button">Подать заявку</button>
+                                    <button sec:authorize="hasAnyRole('mainUser','user')" type="submit" class="btn btn-primary" name="button">Подать заявку</button>
                                 </form>
                             </div>
                         </div>
@@ -89,7 +89,7 @@
                             <form th:method="get"
                                   action="#"
                                   th:action="@{'/considerApplications/{tenderId}'(tenderId=${tender.id})}">
-                                <button type="submit" class="btn btn-primary" name="button">Завершить и рассмотреть заявки
+                                <button type="submit" class="btn btn-primary" name="button">Завершить закупку
                             </button>
                         </form>
                         </div>

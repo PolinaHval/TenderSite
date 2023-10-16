@@ -1,7 +1,6 @@
 package org.teachmeskills.controller;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.teachmeskills.config.service.MyUser;
 import org.teachmeskills.model.User;
 import org.teachmeskills.service.UserService;
-
 import java.util.List;
 
 @Controller

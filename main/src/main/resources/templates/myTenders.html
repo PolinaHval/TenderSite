@@ -8,12 +8,12 @@
 <body>
 <div th:insert="fragments/header.html :: header"/>
 <div class="container">
-    <a class="btn btn-primary m-4" href="/createTender" role="button">Создать новый тендер</a>
+    <a sec:authorize="hasRole('mainUser')" class="btn btn-primary m-4" href="/createTender" role="button">Создать новый тендер</a>
     <div class="row" style="margin-top: 25px">
         <div class="card">
             <div class="card-body">
                 <div class="card-title">
-                    <h3>Мои Тендеры</h3>
+                    <h3>Закупки организации</h3>
                 </div>
                 <div class="card-text">
                     <table class="table">
@@ -50,21 +50,31 @@
                                 <span th:text="${tender.valuta}"/>
                             </td>
                             <td class="col-1">
-<!--                                <div th:if="${@authContext.getLoggedInUserId() == user.id}">-->
+                                <form th:method="get"
+                                      action="#"
+                                      th:action="@{'/tender/{tenderId}'(tenderId=${tender.id})}">
+                                    <button type="submit" class="btn btn-primary" name="button">Подробнее
+                                    </button>
+                                </form>
+                                <div th:if="${tender.victory != null}">
+                                    <p style="color: red">Завершен</p>
+                                </div>
+                            </td>
+                            <td class="col-1">
+                                <div th:if="${#authentication.principal.role.id == 2 }">
                                     <form th:method="delete"
                                           action="#"
                                           th:action="@{'/myTenders/{id}'(id=${tender.id})}">
                                         <button type="submit" class="btn btn-primary" name="button">Удалить</button>
                                     </form>
-<!--                                </div>-->
+                                </div>
                             </td>
                             <td class="col-1">
-                                <div>
+                                <div th:if="${#authentication.principal.role.id == 2 }">
                                     <form th:method="get"
                                           action="#"
                                           th:action="@{'/considerApplications/{tenderId}'(tenderId=${tender.id})}">
-                                        <button type="submit" class="btn btn-primary" name="button">Завершить и
-                                            рассмотреть заявки
+                                        <button type="submit" class="btn btn-primary" name="button">Завершить закупку
                                         </button>
                                     </form>
                                 </div>

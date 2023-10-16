@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.servlet.ModelAndView;
 import org.teachmeskills.error.OrganizationAlreadyExistException;
+import org.teachmeskills.error.OrganizationAlreadyParticipating;
 import org.teachmeskills.error.UserAlreadyExistException;
 import org.teachmeskills.error.UserNameExistException;
 
@@ -46,6 +47,15 @@ public class ExceptionMapper {
         log.error("Unexpected Exception: ", exception);
         model.addObject("message", "Пользователь с таким логином существует. Повторная регистрация невзможна");
         model.setViewName("organizationExists");
+        return model;
+    }
+
+    @ExceptionHandler(OrganizationAlreadyParticipating.class)
+    public ModelAndView handleException(final OrganizationAlreadyParticipating exception) {
+        ModelAndView model = new ModelAndView();
+        log.error("Unexpected Exception: ", exception);
+        model.addObject("message", "Ваша организация уже принимает участие в закупке");
+        model.setViewName("organizationAlreadyParticipating");
         return model;
     }
 }

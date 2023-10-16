@@ -1,12 +1,11 @@
-<html xmlns:sec="http://www.thymeleaf.org/extras/spring-security" xmlns="http://www.w3.org/1999/html">
+<html xmlns="http://www.w3.org/1999/html"  xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <title>Tender.by</title>
     <meta charset="UTF-8">
 
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/> 
 </head>
 <body>
-
 <div th:insert="fragments/header.html :: header"/>
     <div class="row m-4">
         <div class="col-sm-5">
@@ -22,7 +21,7 @@
                 <div class="card-body">
                     <h5 class="card-title">Профиль организации</h5>
                     <a class="btn btn-primary" href="/organization" role="button">Общая информация об организации</a>
-                    <a class="btn btn-primary" href="/users" role="button">Пользователи организации</a>
+                    <a sec:authorize="hasRole('mainUser')" class="btn btn-primary" href="/users" role="button">Пользователи организации</a>
                 </div>
             </div>
         </div>
@@ -32,7 +31,7 @@
             <div class="card">
                 <div class="card-body">
                     <h5 class="card-title">Проведенние закупок и продаж</h5>
-                    <a class="btn btn-primary" href="/myTenders" role="button">Мои закупки</a>
+                    <a class="btn btn-primary" href="/myTenders" role="button">Закупки организации</a>
                 </div>
             </div>
         </div>
@@ -41,7 +40,6 @@
                 <div class="card-body">
                     <h5 class="card-title">Участие в закупках и продажах</h5>
                     <a class="btn btn-primary" href="/myApplications" role="button">Участия в закупках</a>
-                    <a class="btn btn-primary" href="/preApplications" role="button">Предзаявки</a>
                 </div>
             </div>
         </div>

@@ -1,17 +1,21 @@
 package org.teachmeskills.service;
 
-
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.teachmeskills.dto.CreateUserDto;
+import org.teachmeskills.dto.UpdateUserDto;
 import org.teachmeskills.error.UserAlreadyExistException;
 import org.teachmeskills.error.UserNameExistException;
 import org.teachmeskills.model.Organization;
 import org.teachmeskills.model.Role;
 import org.teachmeskills.model.User;
-import org.teachmeskills.repository.UserRepository;;import java.util.List;
-import java.util.Optional;
+import org.teachmeskills.repository.UserRepository;
 
+import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -66,4 +70,20 @@ public class UserService {
    return userRepository.getUserByUsername(username);
   }
 
+  public Page<User> findPaginatedAllUsers(int pageNo, int pageSize) {
+    Pageable pageable = PageRequest.of(pageNo - 1, pageSize);
+    return userRepository.findAll(pageable);
+  }
+
+  public void updateUser(UpdateUserDto updateUserDto, int userId) {
+
+    final User user = userRepository.findUserById(userId);
+    user.setName(updateUserDto.getName());
+    user.setLastName(user.getLastName());
+    user.setPatronymic(user.getPatronymic());
+    user.setPhone(user.getPhone());
+    user.setJobTitle(user.getJobTitle());
+    userRepository.save(user);
+
+  }
 }

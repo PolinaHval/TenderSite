@@ -37,13 +37,14 @@ public class CreateApplicationController {
   @PostMapping(path = "/{tenderId}", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
   protected String createApplication(@PathVariable("tenderId") int tenderId,
                                      @ModelAttribute("createApplicationDto") @Valid final CreateApplicationDto createApplicationDto,
-                                     final BindingResult result) {
+                                     final BindingResult result, final Model model) {
+    Tender tender = applicationFacade.getTender(tenderId);
     if (!result.hasErrors()) {
       Organization organization = ((MyUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal())
           .getOrganization();
-      Tender tender = applicationFacade.getTender(tenderId);
       applicationFacade.createApplication(createApplicationDto, organization, tender);
     } else {
+      model.addAttribute("tender", tender);
       return "/createApplication";
     }
     return "redirect:/tender/" + tenderId;

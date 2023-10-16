@@ -34,12 +34,13 @@ public class RegistrationUserController {
   @PostMapping( path = ("/{organizationId}"), consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
   protected String createUser(@PathVariable("organizationId") long organizationId,
                               @ModelAttribute("createUserDto") @Valid final CreateUserDto createUserDto,
-                              final BindingResult result) {
+                              final BindingResult result, final  Model model) {
+    final Organization organization = registrationUserFacade.getOrganization(organizationId);
     if (!result.hasErrors()) {
-        final Organization organization = registrationUserFacade.getOrganization(organizationId);
         registrationUserFacade.createUser(createUserDto, organization);
         return "redirect:/login";
     } else {
+      model.addAttribute("organization", organization);
       return "registration";
     }
   }

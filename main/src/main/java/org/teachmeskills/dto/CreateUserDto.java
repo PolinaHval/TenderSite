@@ -1,12 +1,10 @@
 package org.teachmeskills.dto;
 
-
 import lombok.Data;
 import org.teachmeskills.validation.PasswordMatches;
 import org.teachmeskills.validation.ValidEmail;
 
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 
 
 @Data
@@ -40,4 +38,5 @@ public class CreateUserDto {
 
   @NotEmpty(message = "Поле не может быть пустым")
   private String role;
+
 }

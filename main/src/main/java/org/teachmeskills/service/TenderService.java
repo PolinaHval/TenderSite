@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 import org.teachmeskills.dto.CreateTenderDto;
 import org.teachmeskills.model.Organization;
 import org.teachmeskills.model.Tender;
-import org.teachmeskills.model.Victory;
 import org.teachmeskills.repository.TenderRepository;
 
 import java.util.List;

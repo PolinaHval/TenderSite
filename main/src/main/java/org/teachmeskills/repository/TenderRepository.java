@@ -15,5 +15,4 @@ public interface TenderRepository extends JpaRepository<Tender, Integer> {
 
   Optional<Tender> findTenderById(int tenderId);
 
-  List<Tender> getTendersByVictory (Victory victory);
 }

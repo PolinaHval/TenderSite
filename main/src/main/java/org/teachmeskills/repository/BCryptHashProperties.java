@@ -1,7 +1,5 @@
 package org.teachmeskills.repository;
 
-
-
 import at.favre.lib.crypto.bcrypt.BCrypt;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;

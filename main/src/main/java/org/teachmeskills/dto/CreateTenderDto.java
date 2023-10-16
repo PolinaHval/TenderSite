@@ -1,6 +1,5 @@
 package org.teachmeskills.dto;
 
-
 import lombok.Data;
 
 import javax.validation.constraints.NotEmpty;

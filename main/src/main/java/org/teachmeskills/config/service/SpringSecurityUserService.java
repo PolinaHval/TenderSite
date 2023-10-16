@@ -26,7 +26,7 @@ public class SpringSecurityUserService implements UserDetailsService {
   @Override
   public MyUser loadUserByUsername(String username) throws UsernameNotFoundException {
     final User user = userService.getUserLogin(username);
-    return new MyUser(user.getUsername(),user.getPassword(), List.of(new SimpleGrantedAuthority("ROLE_" + user.getRole())),
+    return new MyUser(user.getUsername(),user.getPassword(), List.of(new SimpleGrantedAuthority("ROLE_" + user.getRole().getName())),
         user.getOrganization(), user.getName(), user.getLastName(), user.getPatronymic(), user.getEmail(),
         user.getJobTitle(), user.getPhone(), user.getId(), user.getRole());
   }

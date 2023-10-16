@@ -33,6 +33,4 @@ public class Role  {
   @Column(name = "role")
   String name;
 
-//  @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "role")
-//  private List<User> users;
 }

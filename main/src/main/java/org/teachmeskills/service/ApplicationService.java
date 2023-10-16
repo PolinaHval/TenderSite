@@ -3,6 +3,7 @@ package org.teachmeskills.service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.teachmeskills.dto.CreateApplicationDto;
+import org.teachmeskills.error.OrganizationAlreadyParticipating;
 import org.teachmeskills.model.Application;
 import org.teachmeskills.model.Organization;
 import org.teachmeskills.model.Tender;
@@ -21,7 +22,7 @@ public class ApplicationService {
   public void createApplication(CreateApplicationDto createApplicationDto, Organization organization, Tender tender) {
 
     if (applicationRepository.findApplicationByOrganizationApplicationAndTender(organization, tender).isPresent()) {
-      throw new RuntimeException("Ваша организация уже принимает учвстие в тендере");
+      throw new OrganizationAlreadyParticipating("Ваша организация уже принимает учвстие в тендере");
     }
     final Application application = Application.builder()
         .unitPrice(createApplicationDto.getUnitPrice())

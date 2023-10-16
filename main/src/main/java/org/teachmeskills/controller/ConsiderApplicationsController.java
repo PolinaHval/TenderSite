@@ -20,7 +20,7 @@ public class ConsiderApplicationsController {
   private final ApplicationFacade applicationFacade;
 
   @GetMapping("/{tenderId}")
-  protected String Tender(@PathVariable("tenderId") int tenderId, Model model) {
+  protected String listApplications(@PathVariable("tenderId") int tenderId, Model model) {
     Tender tender = applicationFacade.getTender(tenderId);
     List<Application> applications = applicationFacade.getApplications(tenderId);
     model.addAttribute("tender", tender);

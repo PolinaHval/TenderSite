@@ -1,10 +1,14 @@
 package org.teachmeskills.service;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.teachmeskills.dto.CreateOrganizationDto;
 import org.teachmeskills.error.OrganizationAlreadyExistException;
 import org.teachmeskills.model.Organization;
+import org.teachmeskills.model.Tender;
 import org.teachmeskills.repository.OrganizationRepository;
 
 import java.util.List;
@@ -15,7 +19,6 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class OrganizationService {
   private final OrganizationRepository organizationRepository;
-
 
   public void createOrganization(CreateOrganizationDto organizationDto) {
 
@@ -30,7 +33,6 @@ public class OrganizationService {
         .actualAddress(organizationDto.getActualAddress())
         .build();
     organizationRepository.save(organization);
-
   }
 
   public Organization getOrganizationById(long organizationId) {
@@ -48,7 +50,10 @@ public class OrganizationService {
   public List<Organization> findOrganizationsByUsersIsNull(){
     return organizationRepository.findOrganizationsByUsersIsNull();
   }
-
+  public Page<Organization> findPaginatedAllOrganizations(int pageNo, int pageSize) {
+    Pageable pageable = PageRequest.of(pageNo - 1, pageSize);
+    return organizationRepository.findAll(pageable);
+  }
 
   public void deleteOrganization (Organization organization) {
     organizationRepository.delete(organization);

@@ -39,11 +39,11 @@
                 <span th:text="${organization.legalAddress}"/>
               </td>
               <td class="col-1">
-                  <form th:method="delete"
-                        action="#"
-                        th:action="@{'/preApplications/{organizationId}'(organizationId=${organization.id})}">
-                    <button type="submit" class="btn btn-primary" name="button">Удалить</button>
-                  </form>
+                <form th:method="delete"
+                      action="#"
+                      th:action="@{'/admin/preApplications/{id}'(id=${organization.id})}">
+                  <button type="submit" class="btn btn-primary" name="button">Удалить</button>
+                </form>
               </td>
             </tr>
             </tbody>
