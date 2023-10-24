@@ -22,7 +22,7 @@ public class SecurityConfig {
         .authorizeHttpRequests((requests) -> requests
             .antMatchers( "/","/login","/regOrganization", "/registration/**" , "/search", "/reg").permitAll()
             .antMatchers("/admin/**").hasRole("admin")
-            .antMatchers("/users").hasRole("mainUser")
+            .antMatchers("/users", "/updateUser/**" ).hasRole("mainUser")
             .anyRequest().authenticated()
         )
         .formLogin().loginPage("/login")

@@ -1,13 +1,11 @@
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.mock.mockito.MockBean;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
-import org.springframework.test.context.web.WebAppConfiguration;
+
 import org.teachmeskills.dto.CreateUserDto;
 
 import org.teachmeskills.model.Organization;
@@ -26,26 +24,23 @@ import java.util.Optional;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.BDDMockito.given;
 
+@ExtendWith(MockitoExtension.class)
 
-@Disabled
-@ExtendWith(SpringExtension.class)
-@WebAppConfiguration
-@ContextConfiguration(classes = UserService.class)
 public class UserServiceTest {
 
-  @Autowired
+  @InjectMocks
   private UserService userService;
 
-  @MockBean
+  @Mock
   private HashPassword hashPassword;
 
-  @MockBean
+  @Mock
   private UserRepository userRepository;
 
-  @MockBean
+  @Mock
   private OrganizationService organizationService;
 
-  @MockBean
+  @Mock
   private RoleService roleService;
 
   @Test
@@ -142,12 +137,7 @@ public class UserServiceTest {
     Page<User> paginated = userRepository.findAll(PageRequest.of(2, 3));
     Page<User> paginatedUsers = userService.findPaginatedAllUsers(2, 3);
 
-    given(userRepository.findAll(PageRequest.of(2, 3))).willReturn(paginated);
-
     assertEquals(paginatedUsers, paginated);
   }
-
 }
-
-
 

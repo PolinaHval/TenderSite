@@ -5,6 +5,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.validation.annotation.Validated;
 import org.teachmeskills.dto.CreateUserDto;
 import org.teachmeskills.dto.UpdateUserDto;
 import org.teachmeskills.error.UserAlreadyExistException;
@@ -13,12 +14,14 @@ import org.teachmeskills.model.Organization;
 import org.teachmeskills.model.Role;
 import org.teachmeskills.model.User;
 import org.teachmeskills.repository.UserRepository;
+import org.teachmeskills.validation.ValidUser;
 
 import java.util.List;
 import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
+@Validated
 public class UserService {
 
   private final UserRepository userRepository;
@@ -34,14 +37,8 @@ public class UserService {
     return hashPassword.validatePassword(password, hashedPassword);
   }
 
-  public User createUser(CreateUserDto userDto, Organization organization) {
-
-    if (userRepository.findByEmail(userDto.getEmail()).isPresent()) {
-      throw new UserAlreadyExistException("Пользователь с указанной почтой существует");
-    }
-    if (userRepository.findByUsername(userDto.getUsername()).isPresent()) {
-      throw new UserNameExistException("Пользователь с указанным логином существует");
-    }
+  @ValidUser
+  public User createUser( CreateUserDto userDto, Organization organization) {
     final Role role = roleService.getRoleByName(userDto.getRole());
     final User user = new User(userDto.getUsername(), hashingPassword(userDto.getPassword()), userDto.getName(),
         userDto.getLastName(), userDto.getPatronymic(), userDto.getEmail(), userDto.getPhone(), userDto.getJobTitle(),
@@ -87,3 +84,10 @@ public class UserService {
 
   }
 }
+
+//    if (userRepository.findByEmail(userDto.getEmail()).isPresent()) {
+//      throw new UserAlreadyExistException("Пользователь с указанной почтой существует");
+//    }
+//    if (userRepository.findByUsername(userDto.getUsername()).isPresent()) {
+//      throw new UserNameExistException("Пользователь с указанным логином существует");
+//    }

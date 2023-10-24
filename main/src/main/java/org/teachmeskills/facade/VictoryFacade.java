@@ -13,14 +13,8 @@ import org.teachmeskills.service.VictoryService;
 @RequiredArgsConstructor
 public class VictoryFacade {
 
-  private final TenderService tenderService;
   private final ApplicationService applicationService;
   private final VictoryService victoryService;
-
-
-  public Tender getTender(int tenderId){
-    return tenderService.getTenderById(tenderId);
-  }
 
   public Application getApplication(int applicationId){
     return applicationService.getApplicationById(applicationId);
