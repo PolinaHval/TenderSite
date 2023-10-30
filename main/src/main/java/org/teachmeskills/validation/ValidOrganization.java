@@ -11,12 +11,13 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 @Target(ElementType.PARAMETER)
 @Retention(RUNTIME)
-@Constraint(validatedBy = UserValidator.class)
+@Constraint(validatedBy = OrganizationValidator.class)
 @Documented
-public @interface ValidUser {
+public @interface ValidOrganization {
   String message() default "Данные введены некорректно";
 
   Class<?>[] groups() default {};
 
   Class<? extends Payload>[] payload() default {};
+
 }

@@ -5,11 +5,11 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.validation.annotation.Validated;
 import org.teachmeskills.dto.CreateOrganizationDto;
-import org.teachmeskills.error.OrganizationAlreadyExistException;
 import org.teachmeskills.model.Organization;
-import org.teachmeskills.model.Tender;
 import org.teachmeskills.repository.OrganizationRepository;
+import org.teachmeskills.validation.ValidOrganization;
 
 import java.util.List;
 import java.util.Optional;
@@ -17,14 +17,13 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
+@Validated
 public class OrganizationService {
   private final OrganizationRepository organizationRepository;
 
-  public void createOrganization(CreateOrganizationDto organizationDto) {
 
-    if (organizationRepository.findByUnp(organizationDto.getUnp()).isPresent()) {
-      throw new OrganizationAlreadyExistException("Компания с таким УНП уже существует");
-    }
+  public void createOrganization(@ValidOrganization CreateOrganizationDto organizationDto) {
+
     final Organization organization = Organization.builder()
         .unp(organizationDto.getUnp())
         .fullName(organizationDto.getFullName())

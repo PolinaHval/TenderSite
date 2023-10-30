@@ -8,8 +8,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 import org.teachmeskills.dto.CreateUserDto;
 import org.teachmeskills.dto.UpdateUserDto;
-import org.teachmeskills.error.UserAlreadyExistException;
-import org.teachmeskills.error.UserNameExistException;
 import org.teachmeskills.model.Organization;
 import org.teachmeskills.model.Role;
 import org.teachmeskills.model.User;
@@ -37,8 +35,8 @@ public class UserService {
     return hashPassword.validatePassword(password, hashedPassword);
   }
 
-  @ValidUser
-  public User createUser( CreateUserDto userDto, Organization organization) {
+
+  public User createUser(@ValidUser CreateUserDto userDto, Organization organization) {
     final Role role = roleService.getRoleByName(userDto.getRole());
     final User user = new User(userDto.getUsername(), hashingPassword(userDto.getPassword()), userDto.getName(),
         userDto.getLastName(), userDto.getPatronymic(), userDto.getEmail(), userDto.getPhone(), userDto.getJobTitle(),
@@ -84,10 +82,3 @@ public class UserService {
 
   }
 }
-
-//    if (userRepository.findByEmail(userDto.getEmail()).isPresent()) {
-//      throw new UserAlreadyExistException("Пользователь с указанной почтой существует");
-//    }
-//    if (userRepository.findByUsername(userDto.getUsername()).isPresent()) {
-//      throw new UserNameExistException("Пользователь с указанным логином существует");
-//    }
