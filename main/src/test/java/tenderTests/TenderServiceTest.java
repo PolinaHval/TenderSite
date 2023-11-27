@@ -1,3 +1,5 @@
+package tenderTests;
+
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -8,7 +10,6 @@ import org.springframework.data.domain.PageRequest;
 import org.teachmeskills.model.Organization;
 import org.teachmeskills.model.Tender;
 import org.teachmeskills.repository.TenderRepository;
-import org.teachmeskills.service.OrganizationService;
 import org.teachmeskills.service.TenderService;
 
 import java.util.ArrayList;
@@ -27,6 +28,8 @@ public class TenderServiceTest {
   @Mock
   private TenderRepository tenderRepository;
 
+  @Mock
+  private Organization organization;
 
   @Test
   public void getTenderByIdTest() {
@@ -43,37 +46,30 @@ public class TenderServiceTest {
   assertEquals(expected,created);
   }
 
-//  @Test
-//  public void getListTendersTest() {
-//    long organizationId=1;
-//    Organization organization = new Organization(organizationId, 222222222,
-//        "Общество с ограниченной ответсвенностью 'Пример'","ООО 'Пример'","г. Минск",
-//        "г. Минск",null,null,null,null);
-//
-//    List<Tender> tenders = new ArrayList<>();
-//    tenders.add(new Tender (1,"Яблоки", "Яблоки", "BYN", 2,"кг",
-//        5,10,"отсрочка", "отсрочка",organization,null,null));
-//    tenders.add(new Tender (2,"Груши", "Груши", "BYN", 10,"кг",
-//        5,50,"отсрочка", "отсрочка",organization,null,null));
-//    tenders.add(new Tender (3,"Сливы", "Сливы", "BYN", 3,"кг",
-//        3,9,"отсрочка", "отсрочка",organization,null,null));
-//    tenders.add(new Tender (4,"Арбуз", "Арбуз", "BYN", 2,"кг",
-//        5,10,"отсрочка", "отсрочка",organization,null,null));
-//    tenders.add(new Tender (5,"Виноград", "Винноград", "BYN", 2,"кг",
-//        5,10,"отсрочка", "отсрочка",organization,null,null));
-//
-//    given(tenderService.getListTenders(organizationId)).willReturn(tenders);
-//    List<Tender> expected = tenderService.getListTenders(organizationId);
-//
-//    assertEquals(expected, tenders);
-//  }
+  @Test
+  public void getListTendersTest() {
+    long organizationId=1;
+
+    List<Tender> tenders = new ArrayList<>();
+    tenders.add(new Tender (1,"Яблоки", "Яблоки", "BYN", 2,"кг",
+        5,10,"отсрочка", "отсрочка",organization,null,null));
+    tenders.add(new Tender (2,"Груши", "Груши", "BYN", 10,"кг",
+        5,50,"отсрочка", "отсрочка",organization,null,null));
+    tenders.add(new Tender (3,"Сливы", "Сливы", "BYN", 3,"кг",
+        3,9,"отсрочка", "отсрочка",organization,null,null));
+    tenders.add(new Tender (4,"Арбуз", "Арбуз", "BYN", 2,"кг",
+        5,10,"отсрочка", "отсрочка",organization,null,null));
+    tenders.add(new Tender (5,"Виноград", "Винноград", "BYN", 2,"кг",
+        5,10,"отсрочка", "отсрочка",organization,null,null));
+
+    given(tenderService.getListTenders(organizationId)).willReturn(tenders);
+    List<Tender> expected = tenderService.getListTenders(organizationId);
+
+    assertEquals(expected, tenders);
+  }
 
   @Test
-  public void indTenderByIdTest(){
-    long organizationId=1;
-    Organization organization = new Organization(organizationId, 222222222,
-        "Общество с ограниченной ответсвенностью 'Пример'","ООО 'Пример'","г. Минск",
-        "г. Минск",null,null,null,null);
+  public void paginatedTenderByIdTest(){
 
     List<Tender> tenders = new ArrayList<>();
     tenders.add(new Tender (1,"Яблоки", "Яблоки", "BYN", 2,"кг",
@@ -96,7 +92,6 @@ public class TenderServiceTest {
   @Test
   public void findTenderByIdTest() {
 
-    long id = 1;
     Tender tender = new Tender(1,"Яблоки", "Яблоки", "BYN", 2,"кг",
         5,10,"отсрочка", "отсрочка",new Organization(1, 222222222,
         "Общество с ограниченной ответсвенностью 'Пример'","ООО 'Пример'","г. Минск",

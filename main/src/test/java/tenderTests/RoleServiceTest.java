@@ -1,10 +1,10 @@
+package tenderTests;
+
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
-import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.teachmeskills.model.Role;
-import org.teachmeskills.repository.RoleRepository;
 import org.teachmeskills.service.RoleService;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
