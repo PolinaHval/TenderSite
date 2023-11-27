@@ -1,0 +1,91 @@
+<html xmlns:sec="http://www.thymeleaf.org/extras/spring-security" xmlns:th="http://www.thymeleaf.org" >
+<head>
+    <title>Search</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+</head>
+<body>
+<div th:insert="fragments/header.html :: header"/>
+    <div class="container">
+        <div class="row" style="margin-top: 25px">
+            <div class="card">
+                <div class="card-body">
+                    <div class="card-title">
+                        <h3>Тендеры</h3>
+                    </div>
+                    <div class="card-text">
+                        <table class="table">
+                            <tr>
+                                <th>№</th>
+                                <th>Название товара (услуги)</th>
+                                <th>Краткое описание</th>
+                                <th>Стоимость</th>
+                                <th>Валюта</th>
+                                <th>Организатор</th>
+                            </tr>
+                            <tbody>
+                            <tr th:each="tender : ${tenders}">
+                                <td>
+                                    <span th:text="${tender.id}"/>
+                                </td>
+                                <td>
+                                    <span th:text="${tender.subject}"/>
+                                </td>
+                                <td>
+                                    <span th:text="${tender.shortDescription}"/>
+                                </td>
+                                <td>
+                                    <span th:text="${tender.totalCost}"/>
+                                </td>
+                                <td>
+                                    <span th:text="${tender.valuta}"/>
+                                </td>
+                                <td>
+                                    <span th:text="${tender.organizationTenders.shortName}"/>
+                                </td>
+                                <td class="col-1">
+                                    <form th:method="get"
+                                          action="#"
+                                          th:action="@{'/tender/{tenderId}'(tenderId=${tender.id})}">
+                                        <button type="submit" class="btn btn-primary" name="button">Подробнее
+                                        </button>
+                                    </form>
+                                    <div th:if="${tender.victory != null}">
+                                        <p style="color: red">Завершен</p>
+                                    </div>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <div th:if="${totalPages > 1}">
+                            <div class="row col-sm-10">
+                                <div class="col-sm-2">
+                                    Total Rows: [[${totalItems}]]
+                                </div>
+                                <div class="col-sm-2">
+                                <span th:each="i: ${#numbers.sequence(1, totalPages)}">
+                                    <a th:if="${currentPage != i}"
+                                       th:href="@{'/search?page=' + ${i} + '&pageSize=' + ${pageSize}}">[[${i}]]</a>
+                                    <span th:unless="${currentPage != i}">[[${i}]]</span> &nbsp; &nbsp;
+                                </span>
+                                </div>
+                                <div class="col-sm-1">
+                                    <a th:if="${currentPage < totalPages}"
+                                       th:href="@{'/search?page=' + ${currentPage + 1} + '&pageSize=' + ${pageSize}}">Next</a>
+                                    <span th:unless="${currentPage < totalPages}">Next</span>
+                                </div>
+
+                                <div class="col-sm-1">
+                                    <a th:if="${currentPage < totalPages}"
+                                       th:href="@{'/search?page=' + ${totalPages} + '&pageSize=' + ${pageSize}}">Last</a>
+                                    <span th:unless="${currentPage < totalPages}">Last</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,34 @@
+<html xmlns="http://www.w3.org/1999/html">
+<head>
+  <title>Tender.by</title>
+  <meta charset="UTF-8">
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+</head>
+<body>
+
+<div th:insert="fragments/header.html :: header"/>
+<div class="row m-4">
+  <div class="col-sm-5">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Организации</h5>
+        <a class="btn btn-primary" href="/admin/allOrganizations" role="button">Организации</a>
+        <a class="btn btn-primary" href="/admin/preApplications" role="button">Предзаявки на регистрацию</a>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-5">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Пользователи</h5>
+        <a class="btn btn-primary" href="/admin/allUsers" role="button">Пользователи</a>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>
+
+
+

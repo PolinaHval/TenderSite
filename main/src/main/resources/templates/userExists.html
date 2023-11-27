@@ -1,0 +1,25 @@
+<html  xmlns="http://www.w3.org/1999/html">
+<head>
+  <title>UserExists</title>
+  <meta charset="UTF-8">
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+</head>
+<body>
+<div th:insert="fragments/header.html :: header"/>
+<div class="row m-4">
+  <div class="col-sm-5">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Ошибка</h5>
+        <p th:text="${message}"></p>
+        <div class="col-sm-12 d-flex justify-content-center">
+         <span><a class="btn btn-primary m-3" role="button" onclick="history.go(-1)">
+           <span class="icon"> <i class="fas fa-angle-double-left mr-2"></i></span>
+           <span class="text">Вернуться</span></a></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

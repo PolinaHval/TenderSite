@@ -1,0 +1,84 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Registration</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+</head>
+<body>
+<div th:insert="fragments/header.html :: header"/>
+<div class="container">
+    <div class="row" style="margin-top: 25px">
+        <div class="card">
+            <div class="card-body">
+                <div class="card-title">
+                    <h3>Регистрация на электронной торговой площадке Tender.by </h3>
+                </div>
+                <div class="card-body">
+                    <div class="card-title">
+                        <h3>Организация</h3>
+                    </div>
+                    <div class="card-text">
+                        <form method="POST"
+                              action="#"
+                              th:action="@{/regOrganization}"
+                              th:object="${createOrganizationDto}">
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label" for="unp">УНП</label>
+                                <div class="col-sm-3">
+                                    <input class="col-form-label form-control" id="unp" th:field="*{unp}"
+                                           placeholder="УНП">
+                                </div>
+                                <ul class="col-sm-6">
+                                    <li th:each="err : ${#fields.errors('unp')}"  style="color: red" th:text="${err}" class="error" />
+                                </ul>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label" for="fullName">Полное наименование</label>
+                                <div class="col-sm-3">
+                                    <input class="col-form-label form-control" id="fullName"
+                                           th:filed="*{fullName}" name="fullName" placeholder="Полное наименование">
+                                </div>
+                                <ul class="col-sm-6">
+                                    <li th:each="err : ${#fields.errors('fullName')}"  style="color: red" th:text="${err}" class="error" />
+                                </ul>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label" for="shortName">Краткое наименование</label>
+                                <div class="col-sm-3">
+                                    <input class="col-form-label form-control" id="shortName" th:filed="*{shortName}"
+                                           name="shortName" placeholder="Краткое наименование">
+                                </div>
+                                <ul class="col-sm-6">
+                                    <li th:each="err : ${#fields.errors('shortName')}"  style="color: red" th:text="${err}" class="error" />
+                                </ul>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label" for="legalAddress">Юридический адрес</label>
+                                <div class="col-sm-3">
+                                    <input class="col-form-label form-control" id="legalAddress"
+                                           th:filed="*{legalAddress}"
+                                           name="legalAddress" placeholder="Юридический адрес">
+                                </div>
+                                <ul class="col-sm-6">
+                                    <li th:each="err : ${#fields.errors('legalAddress')}"  style="color: red" th:text="${err}" class="error" />
+                                </ul>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label" for="actualAddress">Фактический адрес</label>
+                                <div class="col-sm-3">
+                                    <input class="col-form-label form-control" id="actualAddress"
+                                           th:filed="*{actualAddress}"
+                                           name="actualAddress" placeholder="Фактический адрес">
+                                </div>
+                                <ul class="col-sm-6">
+                                    <li th:each="err : ${#fields.errors('actualAddress')}"  style="color: red" th:text="${err}" class="error" />
+                                </ul>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Продолжить</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>

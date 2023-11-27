@@ -1,0 +1,56 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <title>ConsiderApplication</title>
+
+    <meta charset="UTF-8">
+
+</head>
+<body>
+<div th:insert="fragments/header.html :: header"/>
+<div class="container">
+    <div class="row" style="margin-top: 25px">
+        <div class="card">
+            <div class="card-body">
+                <div class="card-title">Поступившие заявки</div>
+                <div class="card-text">
+                    <table class="table table-bordered table-striped">
+                        <tbody>
+                        <tr>
+                            <th>Участник</th>
+                            <th>Цена за единицу</th>
+                            <th>Общая стоимость</th>
+                        </tr>
+                        <tbody>
+                        <tr th:each="applicationTender:${applications}">
+                            <td>
+                                <span th:text="${applicationTender.organizationApplication.shortName}"/>
+                            </td>
+                            <td>
+                                <span th:text="${applicationTender.unitPrice}"/>
+                            </td>
+                            <td>
+                                <span th:text="${applicationTender.totalCost}"/>
+                            </td>
+                            <td>
+                                <div th:if="${tender.victory == null}">
+                                    <form th:method="post"
+                                          action="#"
+                                          th:action="@{'/victory/{tenderId}/{applicationId}'(tenderId=${applicationTender.tender.id},
+                                          applicationId=${applicationTender.id})}">
+                                        <button type="submit" class="btn btn-primary" name="button">Выбрать
+                                            победителем
+                                        </button>
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
