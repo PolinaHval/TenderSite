@@ -58,7 +58,9 @@ public class RegistrationOrganizationControllerTest {
     createOrganizationDto.setLegalAddress("г. Минск");
     createOrganizationDto.setActualAddress("г. Минск");
 
+    BDDMockito.given(organization.getId()).willReturn(1L);
     BDDMockito.given(organizationService.findOrganizationByUnp(createOrganizationDto.getUnp())).willReturn(organization);
+
 
     mockMvc.perform(MockMvcRequestBuilders
             .post("/regOrganization")

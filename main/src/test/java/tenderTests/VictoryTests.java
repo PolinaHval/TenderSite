@@ -17,32 +17,35 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.teachmeskills.config.service.MyUser;
 import org.teachmeskills.config.service.SpringSecurityUserService;
-import org.teachmeskills.controller.TenderController;
+import org.teachmeskills.controller.VictoryController;
 import org.teachmeskills.facade.TenderFacade;
+import org.teachmeskills.facade.VictoryFacade;
 import org.teachmeskills.model.Application;
 import org.teachmeskills.model.Organization;
 import org.teachmeskills.model.Role;
 import org.teachmeskills.model.Tender;
-
-import java.util.ArrayList;
 import java.util.List;
 
 import static org.mockito.BDDMockito.given;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.redirectedUrl;
+
 
 @ExtendWith(SpringExtension.class)
-@WebMvcTest(TenderController.class)
+@WebMvcTest(VictoryController.class)
 @AutoConfigureMockMvc(addFilters = false)
-@ContextConfiguration(classes = TenderController.class)
+@ContextConfiguration(classes = VictoryController.class)
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-public class TenderControllerTest {
+public class VictoryTests {
+
   @Autowired
   private MockMvc mockMvc;
+  @MockBean
+  private VictoryFacade victoryFacade;
+
   @MockBean
   private TenderFacade tenderFacade;
   @MockBean
   private Organization organization;
-
   @MockBean
   private Role role;
 
@@ -61,7 +64,7 @@ public class TenderControllerTest {
   }
   @Test
   @WithUserDetails(value = "Alina", userDetailsServiceBeanName = "mockUserService")
-  public void shouldReturnBadRequestWhenIdValid() throws Exception {
+  public void testCreateVictoryPost() throws Exception {
     final int tenderId = 1;
     final Tender tender = Tender.builder()
         .id(1)
@@ -77,47 +80,15 @@ public class TenderControllerTest {
         .organizationTenders(organization)
         .build();
 
-    List<Application> applications = new ArrayList<>();
-    applications.add(new Application(1, 5,15,organization, tender));
+    Application application = new Application(1, 5,15,organization, tender);
 
     BDDMockito.given(tenderFacade.getTender(1)).willReturn(tender);
-    BDDMockito.given(tenderFacade.getApplications(1)).willReturn(applications);
-    BDDMockito.given(tenderFacade.getCountApplications(tender)).willReturn(1);
+    BDDMockito.given(victoryFacade.getApplication(1)).willReturn(application);
+
 
     mockMvc.perform(MockMvcRequestBuilders
-            .get("/tender/{tenderId}", tenderId))
-        .andExpect(status().isOk());
+            .post("/victory/1/1"))
+        .andExpect(redirectedUrl("/tender/1"));
   }
-
-
-  @Test
-  @WithUserDetails(value = "Alina", userDetailsServiceBeanName = "mockUserService")
-  public void shouldReturnBadRequestWhenIdInvalid() throws Exception {
-    final String tenderId = "invalid";
-    final Tender tender = Tender.builder()
-        .id(1)
-        .subject("Яблоки")
-        .shortDescription("Яблоки 2 кг")
-        .valuta("Belarusian ruble (BYN)")
-        .amount(3)
-        .unitOfMeasurement("кг")
-        .unitPrice(5)
-        .totalCost(15)
-        .termsOfPayment("предопалата")
-        .deliveryConditions("30 дней")
-        .organizationTenders(organization)
-        .build();
-
-    List<Application> applications = new ArrayList<>();
-    applications.add(new Application(1, 5,15,organization, tender));
-
-    BDDMockito.given(tenderFacade.getTender(1)).willReturn(tender);
-    BDDMockito.given(tenderFacade.getApplications(1)).willReturn(applications);
-    BDDMockito.given(tenderFacade.getCountApplications(tender)).willReturn(1);
-
-    mockMvc.perform(MockMvcRequestBuilders
-            .get("/tender/{tenderId}", tenderId))
-        .andExpect(status().isBadRequest());
-  }
-
 }
+
