@@ -1,4 +1,4 @@
-package tenderTests;
+package org.teachmeskills.controller;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -35,7 +35,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureMockMvc(addFilters = false)
 @ContextConfiguration(classes = VictoryController.class)
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-public class VictoryTests {
+public class VictoryControllerTests {
 
   @Autowired
   private MockMvc mockMvc;

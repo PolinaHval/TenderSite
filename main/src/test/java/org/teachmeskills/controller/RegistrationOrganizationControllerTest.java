@@ -1,4 +1,4 @@
-package tenderTests;
+package org.teachmeskills.controller;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
