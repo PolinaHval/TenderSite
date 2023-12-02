@@ -6,24 +6,36 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
-import org.teachmeskills.model.Role;
+import org.teachmeskills.model.Tender;
 import org.testcontainers.junit.jupiter.Testcontainers;
+import java.util.Optional;
 import static org.junit.Assert.assertEquals;
 
 @ExtendWith(SpringExtension.class)
 @Testcontainers(disabledWithoutDocker = true)
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 @DataJpaTest
-public class RoleRepositoryIntegrationTest extends ConfigTest {
+public class TenderRepositoryIntegrationTest extends ConfigTest{
 
-    @Autowired
-    private RoleRepository roleRepository;
+  @Autowired
+  private TenderRepository tenderRepository;
 
-    @Test
-    public void getRoleByRoleNameTest() {
-        Role expected = new Role(3L, "user");
-        Role result = roleRepository.getRoleByName("user");
+  @Test
+  public void getTenderByIdTest(){
+    int tenderId = 1;
 
-        assertEquals(result, expected);
-    }
+    Tender result  = tenderRepository.getTenderById(tenderId);
+
+    assertEquals(result.getId(), tenderId);
+  }
+
+  @Test
+  public void findTenderByIdTest(){
+    int tenderId = 1;
+
+    Optional<Tender> result  = tenderRepository.findTenderById(tenderId);
+
+    assertEquals(result.get().getId(), tenderId);
+  }
+
 }
