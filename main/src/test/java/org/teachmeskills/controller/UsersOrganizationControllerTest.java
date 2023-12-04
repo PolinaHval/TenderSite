@@ -4,7 +4,6 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mapstruct.control.MappingControl;
 import org.mockito.BDDMockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -12,8 +11,6 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.security.test.context.support.WithUserDetails;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
@@ -22,7 +19,6 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.web.context.WebApplicationContext;
 import org.teachmeskills.config.service.MyUser;
 import org.teachmeskills.config.service.SpringSecurityUserService;
-import org.teachmeskills.controller.UsersOrganizationController;
 import org.teachmeskills.model.Organization;
 import org.teachmeskills.model.Role;
 import org.teachmeskills.model.User;
@@ -30,12 +26,15 @@ import org.teachmeskills.service.HashPassword;
 import org.teachmeskills.service.UserService;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
+import static org.hamcrest.core.StringContains.containsString;
 import static org.mockito.BDDMockito.given;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.redirectedUrl;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
 
 @ExtendWith(SpringExtension.class)
@@ -60,7 +59,6 @@ public class UsersOrganizationControllerTest {
 
   @MockBean
   private MyUser myUser;
-
 
   @MockBean(name = "mockUserService")
   private SpringSecurityUserService springSecurityUserService;
@@ -87,7 +85,16 @@ public class UsersOrganizationControllerTest {
 
     mockMvc.perform(MockMvcRequestBuilders
             .get("/users"))
-        .andExpect(status().isOk());
+        .andExpect(status().isOk())
+        .andExpect(view().name("users"))
+        .andExpect(model().attributeExists("users"))
+        .andExpect(content().string(containsString("<a class=\"btn btn-primary m-4\" href=\"/addUser\" role=\"button\">Добавить пользователя</a>")))
+        .andExpect(content().string(containsString( "<th>Логин</th>")))
+        .andExpect(content().string(containsString( "<th>Фамилия</th>")))
+        .andExpect(content().string(containsString( "<th>Имя</th>")))
+        .andExpect(content().string(containsString( "<th>Отчество</th>")))
+        .andExpect(content().string(containsString( "<th>Адрес почты</th>")))
+        .andExpect(content().string(containsString( "<th>Действия</th>")));
   }
   @Test
   @WithUserDetails(value = "Alina", userDetailsServiceBeanName = "mockUserService")
@@ -103,7 +110,5 @@ public class UsersOrganizationControllerTest {
             .contentType(MediaType.APPLICATION_FORM_URLENCODED_VALUE))
         .andExpect(status().isAccepted())
         .andExpect(redirectedUrl("/users"));
-
   }
-
 }

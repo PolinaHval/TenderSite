@@ -17,7 +17,6 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.teachmeskills.config.service.MyUser;
 import org.teachmeskills.config.service.SpringSecurityUserService;
-import org.teachmeskills.controller.TenderController;
 import org.teachmeskills.facade.TenderFacade;
 import org.teachmeskills.model.Application;
 import org.teachmeskills.model.Organization;
@@ -27,7 +26,9 @@ import org.teachmeskills.model.Tender;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.hamcrest.core.StringContains.containsString;
 import static org.mockito.BDDMockito.given;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @ExtendWith(SpringExtension.class)
@@ -42,13 +43,10 @@ public class TenderControllerTest {
   private TenderFacade tenderFacade;
   @MockBean
   private Organization organization;
-
   @MockBean
   private Role role;
-
   @MockBean
   private MyUser myUser;
-
   @MockBean(name = "mockUserService")
   private SpringSecurityUserService springSecurityUserService;
 
@@ -59,9 +57,10 @@ public class TenderControllerTest {
 
     given(springSecurityUserService.loadUserByUsername("Alina")).willReturn(myUser1);
   }
+
   @Test
   @WithUserDetails(value = "Alina", userDetailsServiceBeanName = "mockUserService")
-  public void shouldReturnBadRequestWhenIdValid() throws Exception {
+  public void shouldReturnOkRequestWhenIdValid() throws Exception {
     final int tenderId = 1;
     final Tender tender = Tender.builder()
         .id(1)
@@ -86,9 +85,27 @@ public class TenderControllerTest {
 
     mockMvc.perform(MockMvcRequestBuilders
             .get("/tender/{tenderId}", tenderId))
-        .andExpect(status().isOk());
+        .andExpect(status().isOk())
+        .andExpect(content().string(containsString("<h2> № <span>1</span></h2>")))
+        .andExpect(content().string(containsString("<h3><span>Яблоки</span></h3>")))
+        .andExpect(content().string(containsString("<td>Краткое описание</td>")))
+        .andExpect(content().string(containsString("<span>Яблоки 2 кг</span>")))
+        .andExpect(content().string(containsString("<td>Организатор</td>")))
+        .andExpect(content().string(containsString("<td>Единицы измерения</td>")))
+        .andExpect(content().string(containsString("<span>кг</span>")))
+        .andExpect(content().string(containsString("<td>Количество единиц</td>")))
+        .andExpect(content().string(containsString("<span>3</span>")))
+        .andExpect(content().string(containsString("<td>Цена за единицу</td>")))
+        .andExpect(content().string(containsString("<span>5</span>")))
+        .andExpect(content().string(containsString("<td>Общая стоимость закупки</td>")))
+        .andExpect(content().string(containsString("<span>15</span>")))
+        .andExpect(content().string(containsString("<td>Вид валюты</td>")))
+        .andExpect(content().string(containsString("<span>Belarusian ruble (BYN)</span>")))
+        .andExpect(content().string(containsString(" <td>Условия дставки</td>")))
+        .andExpect(content().string(containsString("<span>30 дней</span>")))
+        .andExpect(content().string(containsString("<td>Условия оплаты</td>")))
+        .andExpect(content().string(containsString("<span>предопалата</span>")));
   }
-
 
   @Test
   @WithUserDetails(value = "Alina", userDetailsServiceBeanName = "mockUserService")
@@ -119,5 +136,4 @@ public class TenderControllerTest {
             .get("/tender/{tenderId}", tenderId))
         .andExpect(status().isBadRequest());
   }
-
 }

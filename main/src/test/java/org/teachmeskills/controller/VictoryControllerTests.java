@@ -17,7 +17,6 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.teachmeskills.config.service.MyUser;
 import org.teachmeskills.config.service.SpringSecurityUserService;
-import org.teachmeskills.controller.VictoryController;
 import org.teachmeskills.facade.TenderFacade;
 import org.teachmeskills.facade.VictoryFacade;
 import org.teachmeskills.model.Application;
@@ -28,7 +27,6 @@ import java.util.List;
 
 import static org.mockito.BDDMockito.given;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.redirectedUrl;
-
 
 @ExtendWith(SpringExtension.class)
 @WebMvcTest(VictoryController.class)
@@ -41,17 +39,14 @@ public class VictoryControllerTests {
   private MockMvc mockMvc;
   @MockBean
   private VictoryFacade victoryFacade;
-
   @MockBean
   private TenderFacade tenderFacade;
   @MockBean
   private Organization organization;
   @MockBean
   private Role role;
-
   @MockBean
   private MyUser myUser;
-
   @MockBean(name = "mockUserService")
   private SpringSecurityUserService springSecurityUserService;
 
@@ -62,10 +57,10 @@ public class VictoryControllerTests {
 
     given(springSecurityUserService.loadUserByUsername("Alina")).willReturn(myUser1);
   }
+
   @Test
   @WithUserDetails(value = "Alina", userDetailsServiceBeanName = "mockUserService")
   public void testCreateVictoryPost() throws Exception {
-    final int tenderId = 1;
     final Tender tender = Tender.builder()
         .id(1)
         .subject("Яблоки")
@@ -85,10 +80,8 @@ public class VictoryControllerTests {
     BDDMockito.given(tenderFacade.getTender(1)).willReturn(tender);
     BDDMockito.given(victoryFacade.getApplication(1)).willReturn(application);
 
-
     mockMvc.perform(MockMvcRequestBuilders
             .post("/victory/1/1"))
         .andExpect(redirectedUrl("/tender/1"));
   }
 }
-

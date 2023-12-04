@@ -11,17 +11,18 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
+
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import org.teachmeskills.controller.RegistrationOrganizationController;
+
 import org.teachmeskills.dto.CreateOrganizationDto;
 import org.teachmeskills.model.Organization;
 import org.teachmeskills.service.OrganizationService;
-
+import static org.hamcrest.core.StringContains.containsString;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.redirectedUrl;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
-
 
 @ExtendWith(SpringExtension.class)
 @WebMvcTest(RegistrationOrganizationController.class)
@@ -29,13 +30,10 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @ContextConfiguration(classes = RegistrationOrganizationController.class)
 public class RegistrationOrganizationControllerTest {
 
-
   @Autowired
   private MockMvc mockMvc;
-
   @MockBean
   private OrganizationService organizationService;
-
   @MockBean
   private Organization organization;
 
@@ -45,7 +43,15 @@ public class RegistrationOrganizationControllerTest {
             .get("/regOrganization"))
         .andExpect(status().isOk())
         .andExpect(view().name("regOrganization"))
-        .andExpect(model().attributeExists("createOrganizationDto"));
+        .andExpect(model().attributeExists("createOrganizationDto"))
+        .andExpect(content().string(containsString("<h3>Регистрация на электронной торговой площадке Tender.by </h3>")))
+        .andExpect(content().string(containsString("<h3>Организация</h3>")))
+        .andExpect(content().string(containsString("<label class=\"col-sm-3 col-form-label\" for=\"unp\">УНП</label>")))
+        .andExpect(content().string(containsString("<label class=\"col-sm-3 col-form-label\" for=\"fullName\">Полное наименование</label>")))
+        .andExpect(content().string(containsString("<label class=\"col-sm-3 col-form-label\" for=\"shortName\">Краткое наименование</label>")))
+        .andExpect(content().string(containsString("<label class=\"col-sm-3 col-form-label\" for=\"legalAddress\">Юридический адрес</label>")))
+        .andExpect(content().string(containsString("<label class=\"col-sm-3 col-form-label\" for=\"actualAddress\">Фактический адрес</label>")))
+        .andExpect(content().string(containsString("<button type=\"submit\" class=\"btn btn-primary\">Продолжить</button>")));
   }
 
   @Test
@@ -61,7 +67,6 @@ public class RegistrationOrganizationControllerTest {
     BDDMockito.given(organization.getId()).willReturn(1L);
     BDDMockito.given(organizationService.findOrganizationByUnp(createOrganizationDto.getUnp())).willReturn(organization);
 
-
     mockMvc.perform(MockMvcRequestBuilders
             .post("/regOrganization")
             .param("unp", "222222222")
@@ -74,10 +79,3 @@ public class RegistrationOrganizationControllerTest {
         .andExpect(redirectedUrl("/registration/1"));
   }
 }
-
-
-
-
-
-
-

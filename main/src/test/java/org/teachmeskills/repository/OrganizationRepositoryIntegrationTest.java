@@ -17,7 +17,7 @@ import static org.junit.Assert.assertEquals;
 @Testcontainers(disabledWithoutDocker = true)
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 @DataJpaTest
-public class OrganizationRepositoryIntegrationTest extends ConfigTest{
+public class OrganizationRepositoryIntegrationTest extends AbstractIntegrationTenderTest {
 
   @Autowired
   private OrganizationRepository organizationRepository;

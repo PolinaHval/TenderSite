@@ -8,7 +8,7 @@ import org.springframework.test.context.transaction.AfterTransaction;
 import org.testcontainers.containers.PostgreSQLContainer;
 import org.testcontainers.junit.jupiter.Container;
 
-public abstract class ConfigTest {
+public abstract class AbstractIntegrationTenderTest {
 
   @ClassRule
   @Container
