@@ -1,4 +1,4 @@
-package tenderTests;
+package org.teachmeskills.service;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -10,7 +10,6 @@ import org.springframework.data.domain.PageRequest;
 import org.teachmeskills.model.Organization;
 import org.teachmeskills.model.Tender;
 import org.teachmeskills.repository.TenderRepository;
-import org.teachmeskills.service.TenderService;
 
 import java.util.ArrayList;
 import java.util.List;
