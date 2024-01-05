@@ -6,75 +6,84 @@
 </head>
 <body>
 <div th:insert="fragments/header.html :: header"/>
-    <div class="container">
-        <div class="row" style="margin-top: 25px">
-            <div class="card">
-                <div class="card-body">
-                    <div class="card-title">
-                        <h3>Тендеры</h3>
-                    </div>
-                    <div class="card-text">
-                        <table class="table">
-                            <tr>
-                                <th>№</th>
-                                <th>Название товара (услуги)</th>
-                                <th>Краткое описание</th>
-                                <th>Стоимость</th>
-                                <th>Валюта</th>
-                                <th>Организатор</th>
-                            </tr>
-                            <tbody>
-                            <tr th:each="tender : ${tenders}">
-                                <td>
-                                    <span th:text="${tender.id}"/>
-                                </td>
-                                <td>
-                                    <span th:text="${tender.subject}"/>
-                                </td>
-                                <td>
-                                    <span th:text="${tender.shortDescription}"/>
-                                </td>
-                                <td>
-                                    <span th:text="${tender.totalCost}"/>
-                                </td>
-                                <td>
-                                    <span th:text="${tender.valuta}"/>
-                                </td>
-                                <td>
-                                    <span th:text="${tender.organizationTenders.shortName}"/>
-                                </td>
-                                <td class="col-1">
-                                    <form th:method="get"
-                                          action="#"
-                                          th:action="@{'/tender/{tenderId}'(tenderId=${tender.id})}">
-                                        <button type="submit" class="btn btn-primary" name="button">Подробнее
-                                        </button>
-                                    </form>
-                                    <div th:if="${tender.victory != null}">
-                                        <p style="color: red">Завершен</p>
-                                    </div>
-                                </td>
-                            </tr>
-                            </tbody>
-                        </table>
-                        <div th:if="${totalPages > 1}">
-                            <div class="row col-sm-10">
-                                <div class="col-sm-2">
-                                    Total Rows: [[${totalItems}]]
+<div class="container">
+    <div class="row gx-3" style="margin-top: 25px">
+        <div>
+            <a class="btn btn-outline-primary m-3" href="/search" role="button">Все</a>
+            <a class="btn btn-outline-primary m-3" href="/actualTenders" role="button">Актуальные</a>
+            <a class="btn btn-outline-primary m-3" href="/archiveTenders" role="button">В архиве</a>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="card">
+            <div class="card-body">
+                <div class="card-title">
+                    <h3>Тендеры</h3>
+                </div>
+                <div class="card-text">
+                    <table class="table">
+                        <tr>
+                            <th>№</th>
+                            <th>Название товара (услуги)</th>
+                            <th>Краткое описание</th>
+                            <th>Стоимость</th>
+                            <th>Валюта</th>
+                            <th>Организатор</th>
+                        </tr>
+                        <tbody>
+                        <tr th:each="tender : ${tenders}">
+                            <td>
+                                <span th:text="${tender.id}"/>
+                            </td>
+                            <td>
+                                <span th:text="${tender.subject}"/>
+                            </td>
+                            <td>
+                                <span th:text="${tender.shortDescription}"/>
+                            </td>
+                            <td>
+                                <span th:text="${tender.totalCost}"/>
+                            </td>
+                            <td>
+                                <span th:text="${tender.valuta}"/>
+                            </td>
+                            <td>
+                                <span th:text="${tender.organizationTenders.shortName}"/>
+                            </td>
+                            <td class="col-1">
+                                <form th:method="get"
+                                      action="#"
+                                      th:action="@{'/tender/{tenderId}'(tenderId=${tender.id})}">
+                                    <button type="submit" class="btn btn-primary" name="button">Подробнее
+                                    </button>
+                                </form>
+                                <div th:if="${!tender.status}">
+                                    <p style="color: red">Завершен</p>
                                 </div>
-                                <div class="col-sm-2">
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <div th:if="${totalPages > 1}">
+                        <div class="row col-sm-10">
+                            <div class="col-sm-2">
+                                Total Rows: [[${totalItems}]]
+                            </div>
+                            <div class="col-sm-2">
                                 <span th:each="i: ${#numbers.sequence(1, totalPages)}">
                                     <a th:if="${currentPage != i}"
                                        th:href="@{'/search?page=' + ${i} + '&pageSize=' + ${pageSize}}">[[${i}]]</a>
                                     <span th:unless="${currentPage != i}">[[${i}]]</span> &nbsp; &nbsp;
                                 </span>
-                                </div>
-                                <div class="col-sm-1">
-                                    <a th:if="${currentPage < totalPages}"
-                                       th:href="@{'/search?page=' + ${currentPage + 1} + '&pageSize=' + ${pageSize}}">Next</a>
-                                    <span th:unless="${currentPage < totalPages}">Next</span>
-                                </div>
-
+                            </div>
+                            <div class="col-sm-1">
+                                <a th:if="${currentPage < totalPages}"
+                                   th:href="@{'/search?page=' + ${currentPage + 1} + '&pageSize=' + ${pageSize}}">Next</a>
+                                <span th:unless="${currentPage < totalPages}">Next</span>
+                            </div>
                                 <div class="col-sm-1">
                                     <a th:if="${currentPage < totalPages}"
                                        th:href="@{'/search?page=' + ${totalPages} + '&pageSize=' + ${pageSize}}">Last</a>

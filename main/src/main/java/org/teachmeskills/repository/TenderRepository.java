@@ -15,4 +15,7 @@ public interface TenderRepository extends JpaRepository<Tender, Integer> {
 
   Optional<Tender> findTenderById(int tenderId);
 
+  List<Tender> findAllByStatusFalse();
+
+  List<Tender> findAllByStatusTrue();
 }

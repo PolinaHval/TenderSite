@@ -35,7 +35,6 @@ public class UserService {
     return hashPassword.validatePassword(password, hashedPassword);
   }
 
-
   public User createUser(@ValidUser CreateUserDto userDto, Organization organization) {
     final Role role = roleService.getRoleByName(userDto.getRole());
     final User user = new User(userDto.getUsername(), hashingPassword(userDto.getPassword()), userDto.getName(),
@@ -81,6 +80,4 @@ public class UserService {
     userRepository.save(user);
 
   }
-
-
 }

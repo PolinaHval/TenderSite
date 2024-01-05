@@ -6,6 +6,15 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
 
+    <script type="text/javascript">
+        function totalCostTender(){
+
+            var a = parseFloat(document.getElementById('amount').value) || 0;
+            var u = parseFloat(document.getElementById('unitPrice').value) || 0;
+            totalCost = a * u;
+            document.getElementById('totalCost').innerHTML = totalCost;
+        }
+    </script>
 </head>
 <body>
 <div th:insert="fragments/header.html :: header"/>
@@ -23,7 +32,7 @@
                         <form method="POST"
                               action="#"
                               th:action="@{/createTender}"
-                              th:object="${createTenderDto}">
+                              th:object="${createTenderDto}" oninput="totalCostTender()">
                             <div class="form-group row">
                                 <label class="col-sm-3 col-form-label" for="subject">Предмет закупки</label>
                                 <div class="col-sm-3">

@@ -10,5 +10,6 @@ CREATE TABLE tenders
     unit_price          VARCHAR   NOT NULL,
     total_cost          VARCHAR   NOT NULL,
     terms_of_payment    VARCHAR   NOT NULL,
-    delivery_conditions VARCHAR   NOT NULL
+    delivery_conditions VARCHAR   NOT NULL,
+    status BOOLEAN NOT NULL
 );

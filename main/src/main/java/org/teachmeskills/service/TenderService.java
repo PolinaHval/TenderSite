@@ -37,6 +37,7 @@ public class TenderService {
         .termsOfPayment(createTenderDto.getTermsOfPayment())
         .deliveryConditions(createTenderDto.getDeliveryConditions())
         .organizationTenders(organization)
+        .status(true)
         .build();
     tenderRepository.save(tender);
   }
@@ -55,5 +56,13 @@ public class TenderService {
 
   public void deleteTender(Tender tender) {
     tenderRepository.delete(tender);
+  }
+
+  public List<Tender> getListArchiveTender(){
+    return tenderRepository.findAllByStatusFalse();
+  }
+
+  public List<Tender> getListActualTender() {
+    return tenderRepository.findAllByStatusTrue();
   }
 }

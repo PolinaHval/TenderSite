@@ -34,4 +34,6 @@ public class CreateTenderDto {
 
   @NotEmpty
   private String deliveryConditions;
+
+  boolean status = true;
 }

@@ -1,4 +1,5 @@
-<html xmlns:sec="http://www.thymeleaf.org/extras/spring-security" xmlns="http://www.w3.org/1999/html">
+<html xmlns:sec="http://www.thymeleaf.org/extras/spring-security" xmlns="http://www.w3.org/1999/html"
+      xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -6,7 +7,7 @@
 <body>
 <div th:fragment="header">
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <p class="navbar-brand m-3"> Tender.by</p>
+    <a class="navbar-brand m-3" href="/app" > Tender.by</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
             aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -17,7 +18,7 @@
           <a class="nav-link active" aria-current="page" href="/search"> Поиск</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#"> Тарифы</a>
+          <a class="nav-link active" aria-current="page" href="/rates"> Тарифы</a>
         </li>
         <li class="nav-item">
           <a sec:authorize="hasRole('admin')" class="nav-item nav-link active" href="/admin/operatorWorkplace">РМO</a>
@@ -27,6 +28,20 @@
         <div style="display: inline-block;" sec:authentication="principal.organization.shortName"></div> &nbsp;
         <div style="display: inline-block;" sec:authentication="principal.lastName"></div> &nbsp;
         <div style="display: inline-block;" sec:authentication="principal.name"></div> &nbsp;
+        <div style="display: inline-block;" id="time-span"></div> &nbsp;
+        <script>
+          function updateTime(){
+            var currentTime = new Date()
+            var hours = currentTime.getHours()
+            var minutes = currentTime.getMinutes()
+            if (minutes < 10){
+              minutes = "0" + minutes
+            }
+            var t_str = hours + ":" + minutes;
+            document.getElementById('time-span').innerHTML = t_str;
+          }
+          setInterval(updateTime, 1000);
+        </script>
         <a class="btn btn-primary m-3" href="/homePage" role="button">Личный кабиент</a>
         <a class="btn btn-secondary btn-sm m-3" href="/logout" role="button">Выход</a>
       </div>

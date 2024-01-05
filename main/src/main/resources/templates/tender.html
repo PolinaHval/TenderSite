@@ -8,9 +8,9 @@
 <div th:insert="fragments/header.html :: header"/>
 <div class="container">
     <div class="row" style="margin-top: 25px">
-        <h2> № <span th:text="${tender.id}"/></h2>
-        <h3><span th:text="${tender.subject}"/></h3>
-        <div th:if="${tender.victory != null}">
+        <h2> № <span th:text="${tender.id}"></span></h2>
+        <h3><span th:text="${tender.subject}"></span></h3>
+        <div th:if="${!tender.status}">
             <h5 style="color: red"> Тендер завершен </h5>
         </div>
         <div class="card">
@@ -76,7 +76,7 @@
                         </tbody>
                     </table>
                         <div th:if="${#authentication.principal.organization.id != tender.organizationTenders.id}">
-                            <div th:if="${tender.victory == null}">
+                            <div th:if="${tender.status}">
                                 <form th:method="get"
                                       action="#"
                                       th:action="@{'/createApplication/{tenderId}'(tenderId=${tender.id})}">
@@ -85,7 +85,7 @@
                             </div>
                         </div>
                     <div th:unless="${#authentication.principal.organization.id != tender.organizationTenders.id}">
-                        <div th:if="${tender.victory == null}">
+                        <div th:if="${tender.status}">
                             <form th:method="get"
                                   action="#"
                                   th:action="@{'/considerApplications/{tenderId}'(tenderId=${tender.id})}">
@@ -121,7 +121,7 @@
                 </div>
             </div>
         </div>
-        <div th:if="${ tender.victory != null}">
+        <div th:if="${!tender.status}">
             <form th:method="get"
                   action="#"
                   th:action="@{'/victory/{tenderId}'(tenderId=${tender.id})}">
@@ -129,7 +129,7 @@
                 </button>
             </form>
         </div>
-        <div  th:unless="${tender.victory == null}"></div>
+        <div  th:unless="${tender.status}"></div>
     </div>
 </div>
 </body>

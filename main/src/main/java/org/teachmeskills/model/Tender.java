@@ -58,6 +58,9 @@ public class Tender {
   @Column(name = "delivery_Conditions")
   String deliveryConditions;
 
+  @Column(name = "status")
+  boolean status;
+
   @ManyToOne
   @JoinColumn(name = "organization_Id", nullable = false)
   public Organization organizationTenders;

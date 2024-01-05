@@ -23,7 +23,7 @@ public class MvcConfig implements WebMvcConfigurer {
     registry.addViewController("/myTenders").setViewName("myTenders");
     registry.addViewController("/createTender").setViewName("createTender");
     registry.addViewController("/personal").setViewName("personal");
-    registry.addViewController("/search").setViewName("search");
+    registry.addViewController("/search/").setViewName("search");
     registry.addViewController("/organization").setViewName("organization");
     registry.addViewController("/users").setViewName("users");
     registry.addViewController("/addUser").setViewName("addUser");
@@ -37,6 +37,10 @@ public class MvcConfig implements WebMvcConfigurer {
     registry.addViewController("/admin/allUsers").setViewName("allUsers");
     registry.addViewController("/admin/allOrganizations").setViewName("allOrganizations");
     registry.addViewController("/updateUser").setViewName("updateUser");
+    registry.addViewController("/app").setViewName("app");
+    registry.addViewController("/archiveTenders").setViewName("archiveTenders");
+    registry.addViewController("/actualTenders").setViewName("actualTenders");
+    registry.addViewController("/rates").setViewName("rates");
   }
 
   @Bean
