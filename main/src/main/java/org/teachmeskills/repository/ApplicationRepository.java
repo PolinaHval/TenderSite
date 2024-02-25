@@ -6,6 +6,7 @@ import org.teachmeskills.model.Application;
 import org.teachmeskills.model.Organization;
 import org.teachmeskills.model.Tender;
 
+import java.util.List;
 import java.util.Optional;
 
 @Repository
@@ -16,6 +17,4 @@ public interface ApplicationRepository extends JpaRepository<Application, Intege
   int countApplicationByTender(Tender tender);
 
   Optional<Application> findApplicationByOrganizationApplicationAndTender(Organization organization, Tender tender);
-
-
 }

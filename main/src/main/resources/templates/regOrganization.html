@@ -2,83 +2,96 @@
 <head>
     <title>Registration</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link href="/styles/regOrganization.css" rel="stylesheet"/>
 </head>
 <body>
 <div th:insert="fragments/header.html :: header"/>
 <div class="container">
-    <div class="row" style="margin-top: 25px">
-        <div class="card">
-            <div class="card-body">
-                <div class="card-title">
-                    <h3>Регистрация на электронной торговой площадке Tender.by </h3>
-                </div>
-                <div class="card-body">
-                    <div class="card-title">
-                        <h3>Организация</h3>
-                    </div>
-                    <div class="card-text">
-                        <form method="POST"
-                              action="#"
-                              th:action="@{/regOrganization}"
-                              th:object="${createOrganizationDto}">
-                            <div class="form-group row">
-                                <label class="col-sm-3 col-form-label" for="unp">УНП</label>
-                                <div class="col-sm-3">
-                                    <input class="col-form-label form-control" id="unp" th:field="*{unp}"
+    <div class="contents">
+        <div class="registration_inputs">
+            <h4 class="registration_title">Регистрация на электронной торговой площадке HPTender.by</h4>
+            <div class="registration_inputs_center">
+                <h3 class="registration_title_organization">Организация</h3>
+                <div class="form">
+                    <form method="POST"
+                          action="#"
+                          th:action="@{/regOrganization}"
+                          th:object="${createOrganizationDto}">
+                        <div class="group_inputs">
+                            <div class="form-group">
+                                <label class="label" for="unp">УНП</label>
+                                <div class="input_wrapper">
+                                    <input class="input" id="unp" th:field="*{unp}"
                                            placeholder="УНП">
                                 </div>
-                                <ul class="col-sm-6">
+                                <ul class="error">
                                     <li th:each="err : ${#fields.errors('unp')}"  style="color: red" th:text="${err}" class="error" />
                                 </ul>
                             </div>
-                            <div class="form-group row">
-                                <label class="col-sm-3 col-form-label" for="fullName">Полное наименование</label>
-                                <div class="col-sm-3">
-                                    <input class="col-form-label form-control" id="fullName"
+                            <div class="form-group">
+                                <label class="label" for="activity">Деятельность</label>
+                                <div class="input_wrapper">
+                                    <select class="form-select" id="activity"  name="activity">
+                                        <option selected></option>
+                                        <option value="legalEntity">Юридическое лицо</option>
+                                        <option value="individualEntrepreneur">Индивидуальный предприниматель</option>
+                                        <option value="individual">Физическое лицо</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                            <div class="form-group">
+                                <label class="label" for="fullName">Полное наименование</label>
+                                <div class="input_wrapper">
+                                    <input class="input_long" id="fullName"
                                            th:filed="*{fullName}" name="fullName" placeholder="Полное наименование">
                                 </div>
-                                <ul class="col-sm-6">
+                                <ul class="error">
                                     <li th:each="err : ${#fields.errors('fullName')}"  style="color: red" th:text="${err}" class="error" />
                                 </ul>
                             </div>
-                            <div class="form-group row">
-                                <label class="col-sm-3 col-form-label" for="shortName">Краткое наименование</label>
-                                <div class="col-sm-3">
-                                    <input class="col-form-label form-control" id="shortName" th:filed="*{shortName}"
-                                           name="shortName" placeholder="Краткое наименование">
+                            <div class="form-group">
+                                <label class="label" for="shortName">Краткое наименование</label>
+                                <div class="input_wrapper">
+                                    <input class="input_long" id="shortName" th:filed="*{shortName}" name="shortName" placeholder="Краткое наименование">
                                 </div>
-                                <ul class="col-sm-6">
+                                <ul class="error">
                                     <li th:each="err : ${#fields.errors('shortName')}"  style="color: red" th:text="${err}" class="error" />
                                 </ul>
                             </div>
-                            <div class="form-group row">
-                                <label class="col-sm-3 col-form-label" for="legalAddress">Юридический адрес</label>
-                                <div class="col-sm-3">
-                                    <input class="col-form-label form-control" id="legalAddress"
+                            <div class="form-group">
+                                <label class="label" for="legalAddress">Юридический адрес</label>
+                                <div class="input_wrapper">
+                                    <input class="input_long" id="legalAddress"
                                            th:filed="*{legalAddress}"
                                            name="legalAddress" placeholder="Юридический адрес">
                                 </div>
-                                <ul class="col-sm-6">
+                                <ul class="error">
                                     <li th:each="err : ${#fields.errors('legalAddress')}"  style="color: red" th:text="${err}" class="error" />
                                 </ul>
                             </div>
-                            <div class="form-group row">
-                                <label class="col-sm-3 col-form-label" for="actualAddress">Фактический адрес</label>
-                                <div class="col-sm-3">
-                                    <input class="col-form-label form-control" id="actualAddress"
+                            <div class="form-group">
+                                <label class="label" for="actualAddress">Фактический адрес</label>
+                                <div class="input_wrapper">
+                                    <input class="input_long" id="actualAddress"
                                            th:filed="*{actualAddress}"
                                            name="actualAddress" placeholder="Фактический адрес">
                                 </div>
-                                <ul class="col-sm-6">
+                                <ul class="error">
                                     <li th:each="err : ${#fields.errors('actualAddress')}"  style="color: red" th:text="${err}" class="error" />
                                 </ul>
                             </div>
-                            <button type="submit" class="btn btn-primary">Продолжить</button>
-                        </form>
-                    </div>
+                        <button type="submit" class="btn_registration">Продолжить</button>
+                    </form>
                 </div>
             </div>
         </div>
+        <div class="registration_info">
+            <div class="img_registration"></div>
+        </div>
     </div>
 </div>
+<div th:insert="fragments/footer.html :: footer"/>
 </body>
+</html>
+

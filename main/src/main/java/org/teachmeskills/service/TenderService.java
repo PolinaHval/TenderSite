@@ -37,7 +37,11 @@ public class TenderService {
         .termsOfPayment(createTenderDto.getTermsOfPayment())
         .deliveryConditions(createTenderDto.getDeliveryConditions())
         .organizationTenders(organization)
+        .comments(createTenderDto.getComments())
         .status(true)
+        .statusWithoutWinner(false)
+        .priceVisibility(createTenderDto.getPriceVisibility())
+        .withdrawalOfApplication(createTenderDto.getWithdrawalOfApplication())
         .build();
     tenderRepository.save(tender);
   }

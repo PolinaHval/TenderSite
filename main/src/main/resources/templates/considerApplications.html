@@ -10,6 +10,14 @@
 <div th:insert="fragments/header.html :: header"/>
 <div class="container">
     <div class="row" style="margin-top: 25px">
+        <h2> № <span th:text="${tender.id}"></span></h2>
+        <h3><span th:text="${tender.subject}"></span></h3>
+        <form th:method="post"
+              action="#"
+              th:action="@{'/victory/{tenderId}'(tenderId=${tender.id})}">
+            <button type="submit" class="btn btn-primary"  name="button">Завершить без победителя</button>
+        </form>
+        </div>
         <div class="card">
             <div class="card-body">
                 <div class="card-title">Поступившие заявки</div>
@@ -50,7 +58,7 @@
                 </div>
             </div>
         </div>
-    </div>
 </div>
+<div th:insert="fragments/footer.html :: footer"/>
 </body>
 </html>

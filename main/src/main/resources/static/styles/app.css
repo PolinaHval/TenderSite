@@ -1,0 +1,136 @@
+.container{
+    max-width: 1500px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.btn{
+   padding: 10px 20px;
+    background-color: #3D417B;
+    color: white;
+}
+
+.p{
+    margin: 0;
+}
+
+.welcome{
+    padding: 50px 0 100px 0;
+}
+
+.welcome_wrapper{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.welcome_img{
+    background-image: url('../images/welcome.jpeg');
+    width: 600px;
+    height: 500px;
+    object-fit: cover;
+    background-position: center;
+    -webkit-background-size: cover;
+    border-radius: 50px;
+}
+
+.welcome_text{
+    width: 750px;
+}
+
+.welcome_subtitle{
+    margin-bottom: 7px;
+    font-weight: 500;
+    font-size: 14px;
+    letter-spacing: 0.1em;
+    opacity: 0.5;
+    color: #201F1F;
+}
+
+.welcome_title{
+    font-weight: 500;
+    font-size: 58px;
+    color: #201F1F ;
+
+}
+.welcome_desc{
+    margin: 40px 0 60px 0;
+    font-weight: 500;
+    opacity: 0.7;
+}
+
+.advantages_list{
+    padding: 100px 0;
+    background-color: #F9F9F9;
+}
+
+.container_list{
+    max-width: 1500px;
+    margin-right: auto;
+    margin-left: auto;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 40px 10px;
+}
+
+.advantage_card{
+    width: 250px;
+    border: 2px solid #3D417B;
+    border-bottom-width: 4px;
+    border-radius: 10px;
+    overflow: hidden;
+    text-align: center;
+    background-color: white;
+}
+
+.advantage_list_text_wrapper{
+    padding: 30px 20px;
+}
+
+.advantages_list_title{
+    font-weight: 500;
+    font-size: 20px;
+}
+
+.advantages_list_desc{
+    font-weight: 500;
+    font-size: 16px;
+    opacity: 0.7;
+}
+
+.img_advantages_list_first{
+    background-image: url('../images/header_first.jpg');
+    max-width: 100%;
+    height: 175px;
+    object-fit: cover;
+    background-position: center;
+    -webkit-background-size: cover;
+}
+
+.img_advantages_list_second{
+    background-image: url('../images/header_second.jpg');
+    max-width: 100%;
+    height: 175px;
+    object-fit: cover;
+    background-position: center;
+    -webkit-background-size: cover;
+}
+
+.img_advantages_list_third{
+    background-image: url('../images/header_third.jpg');
+    max-width: 100%;
+    height: 175px;
+    object-fit: cover;
+    background-position: center;
+    -webkit-background-size: cover;
+}
+
+.img_advantages_list_fourth{
+    background-image: url('../images/header_fourth.jpg');
+    max-width: 100%;
+    height: 175px;
+    object-fit: cover;
+    background-position: center;
+    -webkit-background-size: cover;
+}

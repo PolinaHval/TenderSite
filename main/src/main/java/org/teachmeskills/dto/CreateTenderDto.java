@@ -35,5 +35,12 @@ public class CreateTenderDto {
   @NotEmpty
   private String deliveryConditions;
 
-  boolean status = true;
+  @NotEmpty
+  private String priceVisibility;
+
+  @NotEmpty
+  private String withdrawalOfApplication;
+
+  private String comments;
+
 }

@@ -23,7 +23,7 @@
         <div class="card">
             <div class="card-body">
                 <div class="card-title">
-                    <h3> Создать ноовый тендер </h3>
+                    <h3> Создать новый тендер </h3>
                 </div>
                 <div class="card-text">
                 </div>
@@ -105,6 +105,28 @@
                                     <p th:if="${#fields.hasErrors('totalCost')}" style="color: red">Поле заполнено некорректно</p>
                                 </div>
                             </div>
+
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label" for="priceVisibility">Видимость цен между участникам</label>
+                                <div class="col-sm-3">
+                                    <select class="form-select" id="priceVisibility" th:filed="*{priceVisibility}" name="priceVisibility">
+                                        <option selected></option>
+                                        <option value="prices">Видны цены</option>
+                                        <option value="ranks">Ранги</option>
+                                        <option value="notRanksAndPrices">Не отображать ранги и цены</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label" for="withdrawalOfApplication">Разрешить отзыв заявки</label>
+                                <div class="col-sm-3">
+                                    <select class="form-select" id="withdrawalOfApplication" th:filed="*{withdrawalOfApplication}" name="withdrawalOfApplication">
+                                        <option selected></option>
+                                        <option value="yes">Да</option>
+                                        <option value="no">Нет</option>
+                                    </select>
+                                </div>
+                            </div>
                             <div class="form-group row">
                                 <label class="col-sm-3 col-form-label" for="termsOfPayment">Условия оплаты</label>
                                 <div class="col-sm-3">
@@ -127,6 +149,16 @@
                                     <p th:if="${#fields.hasErrors('deliveryConditions')}" style="color: red">Поле заполнено некорректно</p>
                                 </div>
                             </div>
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label" for="comments">Комментарии</label>
+                                <div class="col-sm-3">
+                                    <input class="col-form-label form-control" id="comments"
+                                           th:filed="*{comments}" name="comments">
+                                </div>
+                                <div class="col-sm-6">
+                                    <p th:if="${#fields.hasErrors('deliveryConditions')}" style="color: red">Поле заполнено некорректно</p>
+                                </div>
+                            </div>
                             <button type="submit" class="btn btn-primary">Создать</button>
                         </form>
                     </div>
@@ -135,5 +167,6 @@
         </div>
     </div>
 </div>
+<div th:insert="fragments/footer.html :: footer"/>
 </body>
 </html>

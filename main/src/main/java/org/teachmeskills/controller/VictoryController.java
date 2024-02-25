@@ -29,6 +29,13 @@ public class VictoryController {
     return "redirect:/tender/" + tenderId;
   }
 
+  @PostMapping("/{tenderId}")
+  protected String finishTenderWithoutWinner(@PathVariable("tenderId") int tenderId){
+    victoryFacade.finishTenderWithoutWinner(tenderId);
+    return "redirect:/tender/" + tenderId;
+  }
+
+
   @GetMapping("/{tenderId}")
   protected String chooseWinner(@PathVariable("tenderId") int tenderId, Model model) {
     Tender tender = tenderFacade.getTender(tenderId);

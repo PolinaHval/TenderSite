@@ -1,36 +1,64 @@
-<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html" xmlns:sec="http://www.w3.org/1999/xhtml">
+<html xmlns:sec="http://www.thymeleaf.org/extras/spring-security" xmlns="http://www.w3.org/1999/html"
+      xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
   <title>Электрронная торговая площадка</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css">
-  <link href="styles/app.css" rel="stylesheet"/>
+  <link href="/styles/app.css" rel="stylesheet"/>
 
 </head>
 <body>
 <div th:insert="fragments/header.html :: header"/>
-<div class="container">
-  <div class="row" style="margin-top: 50px">
-    <div class="card">
-      <div class="card-body">
-        <div class="card-title">
-          <h1 class="font-weight-bold text-center">
-            Участие и доступ
-            <br>
-            к уникальным закупкам
-          </h1>
-          <p class= "text-center">
-            Для бизнеса любого направления и размера
-          <br>
-            Находите новых клиентов
-          <br>
-            и заключайте сделки онлайн
-          </p>
+<main>
+  <section class="welcome">
+    <div class="container">
+        <div class="welcome_wrapper">
+            <div class="welcome_text">
+                <h4 class="welcome_subtitle">Быстрые закупки</h4>
+                <h1 class="welcome_title">Доступ к уникальным закупкам</h1>
+                <p class="welcome_desc">Для бизнеса любого направления и размера <br>
+                    Находите новых клиентов <br>
+                    Заключайте сделки онлайн</p>
+                <div sec:authorize="isAnonymous()">
+                    <a href="/regOrganization" role="button" class="btn">Зарегистрироваться</a>
+                </div>
+            </div>
+            <div class="welcome_img"></div>
         </div>
-        <div sec:authorize="isAnonymous()">
-          <a class="btn btn-primary" href="/regOrganization" role="button">Зарегистрироваться</a>
-        </div>
-      </div>
-      </div>
     </div>
-  </div>
+  </section>
+  <section class="advantages_list">
+    <div class="container_list">
+      <div class="advantage_card">
+        <div class="img_advantages_list_first"></div>
+          <div class="advantage_list_text_wrapper">
+              <h4 class="advantages_list_title">Закупки с бесплатнным участием</h4>
+              <p class="advantages_list_desc">Проводим акции на участия в закупках</p>
+          </div>
+      </div>
+      <div class="advantage_card">
+        <div class="img_advantages_list_second"></div>
+          <div class="advantage_list_text_wrapper">
+              <h4 class="advantages_list_title">Автоматическая регистрация</h4>
+              <p class="advantages_list_desc">Заполните форму за 5 минут и система зарегистрирует вас автоматически </p>
+          </div>
+      </div>
+        <div class="advantage_card">
+            <div class="img_advantages_list_third"></div>
+            <div class="advantage_list_text_wrapper">
+                <h4 class="advantages_list_title">Доступ к подробным условиям участия</h4>
+                <p class="advantages_list_desc">Авторизованным пользователям доступна закупочная документация и условия участия</p>
+            </div>
+        </div>
+        <div class="advantage_card">
+            <div class="img_advantages_list_fourth"></div>
+            <div class="advantage_list_text_wrapper">
+                <h4 class="advantages_list_title">Сохранение закупок в избранное</h4>
+                <p class="advantages_list_desc">Интересующие закупки возможно добавлять в избранное</p>
+            </div>
+        </div>
+    </div>
+  </section>
+</main>
+<div th:insert="fragments/footer.html :: footer"/>
 </body>
 </html>

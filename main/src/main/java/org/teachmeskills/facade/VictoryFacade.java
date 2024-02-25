@@ -6,7 +6,6 @@ import org.teachmeskills.model.Application;
 import org.teachmeskills.model.Organization;
 import org.teachmeskills.model.Tender;
 import org.teachmeskills.service.ApplicationService;
-import org.teachmeskills.service.TenderService;
 import org.teachmeskills.service.VictoryService;
 
 @Service
@@ -22,5 +21,9 @@ public class VictoryFacade {
 
   public void createVictory(Organization organization, Tender tender){
     victoryService.createVictory(organization, tender);
+  }
+
+  public void finishTenderWithoutWinner(int tenderId){
+    victoryService.completedTenderWithoutWinner(tenderId);
   }
 }

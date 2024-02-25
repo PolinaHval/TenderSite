@@ -1,0 +1,10 @@
+.participants {
+    counter-reset: trCount;
+    overflow: auto;
+    white-space: nowrap;
+}
+.participants tr td:first-child:before {
+    position:relative;
+    counter-increment: trCount;
+    content:counter(trCount);
+}

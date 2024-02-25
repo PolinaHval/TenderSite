@@ -32,15 +32,6 @@
                                 <span th:text="${applicationTender.tender.totalCost}"/>
                             </td>
                             <td class="col-1">
-                                <div>
-                                    <form th:method="delete"
-                                          action="#"
-                                          th:action="@{'/myApplications/{id}'(id=${applicationTender.id})}">
-                                        <button type="submit" class="btn btn-primary" name="button">Удалить</button>
-                                    </form>
-                                </div>
-                            </td>
-                            <td class="col-1">
                                 <form th:method="get"
                                       action="#"
                                       th:action="@{'/tender/{tenderId}'(tenderId=${applicationTender.tender.id})}">
@@ -56,5 +47,6 @@
         </div>
     </div>
 </div>
+<div th:insert="fragments/footer.html :: footer"/>
 </body>
 </html>>

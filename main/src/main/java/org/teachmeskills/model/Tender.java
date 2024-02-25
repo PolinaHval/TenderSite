@@ -61,6 +61,19 @@ public class Tender {
   @Column(name = "status")
   boolean status;
 
+  @Column(name = "status_Without_Winner")
+  boolean statusWithoutWinner;
+
+  @Column(name = "comments")
+  String comments;
+
+  @Column (name = "price_Visibility")
+  String priceVisibility;
+
+
+  @Column(name = "withdrawal_Of_Application")
+  String withdrawalOfApplication;
+
   @ManyToOne
   @JoinColumn(name = "organization_Id", nullable = false)
   public Organization organizationTenders;

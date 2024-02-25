@@ -2,139 +2,148 @@
 <head>
     <title>Registration</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link href="/styles/registration.css" rel="stylesheet"/>
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <p class="navbar-brand m-3"> Tender.by</p>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
-            aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-</nav>
+<div class="container_header" style="max-width: 1500px; margin-right: auto; margin-left: auto">
+    <nav class="navbar navbar-expand-lg">
+        <a class="navbar-brand" href="/app" style="color: #3D417B; margin: 0; padding-right: 20px"> HPTender.by</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+                aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    </nav>
+</div>
+
 <div class="container">
-    <div class="row" style="margin-top: 25px">
-        <div class="card">
-            <div class="card-body">
-                <div class="card-title">
-                    <h3>Регистрация на электронной торговой площадке Tender.by </h3>
-                </div>
-                <div class="card-text">
-                </div>
-                <div class="card-body">
-                    <div class="card-title">
-                        <h3>Пользователь организации </h3>
-                    </div>
-                    <div class="card-text">
-                        <form method="POST"
-                              action="#"
-                              th:action="@{'/registration/{organizationId}'(organizationId=${organization.id})}"
-                              th:object="${createUserDto}">
-                            <div class="form-group row">
-                                <label class="col-sm-3 col-form-label" for="username">Логин</label>
-                                <div class="col-sm-3">
-                                    <input class="col-form-label form-control" id="username" name="username"
-                                           th:field="*{username}" placeholder="Логин">
+    <div class="contents">
+        <div class="registration_inputs">
+            <h4 class="registration_title">Регистрация на электронной торговой площадке HPTender.by</h4>
+            <div class="registration_inputs_center">
+                <h3 class="registration_title_organization">Пользователь</h3>
+                <div class="form">
+                    <form method="POST"
+                          action="#"
+                          th:action="@{'/registration/{organizationId}'(organizationId=${organization.id})}"
+                          th:object="${createUserDto}">
+                        <div class="group_inputs">
+                            <div class="form-group">
+                                <label class="label" for="username">Логин</label>
+                                <div class="input_wrapper">
+                                    <input class="input" id="username" th:field="*{username}"
+                                           placeholder="Логин">
                                 </div>
-                                <ul class="col-sm-6">
+                                <ul class="error">
                                     <li th:each="err : ${#fields.errors('username')}"  style="color: red" th:text="${err}" class="error" />
                                 </ul>
                             </div>
-                            <div class="form-group row">
-                                <label class="col-sm-3 col-form-label" for="password">Пароль</label>
-                                <div class="col-sm-3">
-                                    <input class="col-form-label form-control" type="password" id="password"
-                                           th:filed="*{password}" name="password" placeholder="Пароль"/>
+                            <div class="form-group">
+                                <label class="label" for="email">Email</label>
+                                <div class="input_wrapper">
+                                    <input class="input" id="email"
+                                           th:filed="*{email}" name="email" placeholder="Email">
                                 </div>
-                                <ul class="col-sm-6">
-                                    <li th:each="err : ${#fields.errors('password')}"  style="color: red" th:text="${err}" class="error" />
-                                </ul>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-sm-3 col-form-label" for="passwordMatches">Повторите пароль</label>
-                                <div class="col-sm-3">
-                                    <input class="col-form-label form-control" type="password" id="passwordMatches"
-                                           th:filed="*{passwordMatches}" name="passwordMatches" placeholder="Повторите парооль"/>
-                                </div>
-                                <ul class="col-sm-6">
-                                    <li th:each="err : ${#fields.errors('passwordMatches')}"  style="color: red" th:text="${err}" class="error" />
-                                </ul>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-sm-3 col-form-label" for="name">Имя</label>
-                                <div class="col-sm-3">
-                                    <input class="col-form-label form-control" id="name" th:filed="*{name}"
-                                           name="name" placeholder="Имя">
-                                </div>
-                                <ul class="col-sm-6">
-                                    <li th:each="err : ${#fields.errors('name')}"  style="color: red" th:text="${err}" class="error" />
-                                </ul>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-sm-3 col-form-label" for="lastName">Фамилия</label>
-                                <div class="col-sm-3">
-                                    <input class="col-form-label form-control" id="lastName" th:filed="*{lastName}"
-                                           name="lastName" placeholder="Фамилия">
-                                </div>
-                                <ul class="col-sm-6">
-                                    <li th:each="err : ${#fields.errors('lastName')}"  style="color: red" th:text="${err}" class="error" />
-                                </ul>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-sm-3 col-form-label" for="patronymic">Отчество</label>
-                                <div class="col-sm-3">
-                                    <input class="col-form-label form-control" id="patronymic" th:filed="*{patronymic}"
-                                           name="patronymic" placeholder="Отчество">
-                                </div>
-                                <ul class="col-sm-6">
-                                    <li th:each="err : ${#fields.errors('patronymic')}"  style="color: red" th:text="${err}" class="error" />
-                                </ul>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-sm-3 col-form-label" for="email">Email</label>
-                                <div class="col-sm-3">
-                                    <input class="col-form-label form-control" type="email" id="email"
-                                           th:filed="*{email}" name="email" placeholder="Адрес электронной почты">
-                                </div>
-                                <ul class="col-sm-6">
+                                <ul class="error">
                                     <li th:each="err : ${#fields.errors('email')}"  style="color: red" th:text="${err}" class="error" />
                                 </ul>
                             </div>
-                            <div class="form-group row">
-                                <label class="col-sm-3 col-form-label" for="phone">Номер телефона</label>
-                                <div class="col-sm-3">
-                                    <input class="col-form-label form-control"  id="phone"
+                        </div>
+                        <div class="group_inputs">
+                            <div class="form-group">
+                                <label class="label" for="password">Пароль</label>
+                                <div class="input_wrapper">
+                                    <input class="input" id="password"
+                                           th:filed="*{password}" name="password" type="password" placeholder="Пароль">
+                                </div>
+                                <ul class="error">
+                                    <li th:each="err : ${#fields.errors('password')}"  style="color: red" th:text="${err}" class="error" />
+                                </ul>
+                            </div>
+                            <div class="form-group">
+                                <label class="label" for="passwordMatches">Повторите пароль</label>
+                                <div class="input_wrapper">
+                                    <input class="input" id="passwordMatches"
+                                           th:filed="*{password}" type="password" name="passwordMatches" placeholder="Повторите пароль">
+                                </div>
+                                <ul class="error">
+                                    <li th:each="err : ${#fields.errors('password')}"  style="color: red" th:text="${err}" class="error" />
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="group_inputs">
+                            <div class="form-group">
+                                <label class="label" for="name">Имя</label>
+                                <div class="input_wrapper">
+                                    <input class="input" id="name"
+                                           th:filed="*{name}" name="name" placeholder="Имя">
+                                </div>
+                                <ul class="error">
+                                    <li th:each="err : ${#fields.errors('name')}"  style="color: red" th:text="${err}" class="error" />
+                                </ul>
+                            </div>
+                            <div class="form-group">
+                                <label class="label" for="lastName">Фамилия</label>
+                                <div class="input_wrapper">
+                                    <input class="input" id="lastName"
+                                           th:filed="*{lastName}" name="lastName" placeholder="Фамилия">
+                                </div>
+                                <ul class="error">
+                                    <li th:each="err : ${#fields.errors('lastName')}"  style="color: red" th:text="${err}" class="error" />
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="group_inputs">
+                            <div class="form-group">
+                                <label class="label" for="patronymic">Отчество</label>
+                                <div class="input_wrapper">
+                                    <input class="input" id="patronymic"
+                                           th:filed="*{patronymic}" name="patronymic" placeholder="Отчество">
+                                </div>
+                                <ul class="error">
+                                    <li th:each="err : ${#fields.errors('patronymic')}"  style="color: red" th:text="${err}" class="error" />
+                                </ul>
+                            </div>
+                            <div class="form-group">
+                                <label class="label" for="phone">Номер телефона</label>
+                                <div class="input_wrapper">
+                                    <input class="input" id="phone"
                                            th:filed="*{phone}" name="phone" placeholder="Номер телефона">
                                 </div>
-                                <ul class="col-sm-6">
+                                <ul class="error">
                                     <li th:each="err : ${#fields.errors('phone')}"  style="color: red" th:text="${err}" class="error" />
                                 </ul>
                             </div>
-                            <div class="form-group row">
-                                <label class="col-sm-3 col-form-label" for="jobTitle">Должность</label>
-                                <div class="col-sm-3">
-                                    <input class="col-form-label form-control" id="jobTitle" th:filed="*{jobTitle}"
-                                           name="jobTitle" placeholder="Должность">
+                        </div>
+                        <div class="group_inputs">
+                            <div class="form-group">
+                                <label class="label" for="jobTitle">Должность</label>
+                                <div class="input_wrapper">
+                                    <input class="input" id="jobTitle"
+                                           th:filed="*{jobTitle}" name="jobTitle" placeholder="Должность">
                                 </div>
-                                <ul class="col-sm-6">
+                                <ul class="error">
                                     <li th:each="err : ${#fields.errors('jobTitle')}"  style="color: red" th:text="${err}" class="error" />
                                 </ul>
                             </div>
-                            <div class="form-group row">
-                                <label class="col-sm-3 col-form-label" for="role">Права пользователя</label>
-                                <div class="col-sm-3">
+                            <div class="form-group">
+                                <label class="label" for="role">Права пользователя</label>
+                                <div class="input_wrapper">
                                     <select class="form-select" id="role" th:filed="*{role}" name="role">
-                                        <option selected></option>
                                         <option value="mainUser">Главный пользователь</option>
                                     </select>
                                 </div>
                             </div>
-                            <button type="submit" class="btn btn-primary">Продолжить</button>
-                        </form>
-                    </div>
+                        </div>
+                        <button type="submit" class="btn_registration">Зарегистрировать</button>
+                    </form>
                 </div>
             </div>
         </div>
+        <div class="registration_info">
+            <div class="img_registration"></div>
+        </div>
     </div>
 </div>
+<div th:insert="fragments/footer.html :: footer"/>
 </body>
 

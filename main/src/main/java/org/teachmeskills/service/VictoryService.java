@@ -24,4 +24,11 @@ public class VictoryService {
     completedTender.setStatus(false);
     tenderRepository.save(completedTender);
   }
+
+  public void completedTenderWithoutWinner(int tenderId){
+    final Tender completedTenderWithoutWinner = tenderRepository.getTenderById(tenderId);
+    completedTenderWithoutWinner.setStatus(false);
+    completedTenderWithoutWinner.setStatusWithoutWinner(true);
+    tenderRepository.save(completedTenderWithoutWinner);
+  }
 }

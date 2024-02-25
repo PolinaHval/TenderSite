@@ -1,0 +1,43 @@
+<html xmlns:sec="http://www.thymeleaf.org/extras/spring-security" xmlns="http://www.w3.org/1999/html"
+      xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Footer</title>
+</head>
+<body>
+<div th:fragment="footer">
+    <footer class="footer" style="padding: 120px 0">
+        <div class="container" style="max-width: 1500px; margin-right: auto; margin-left: auto">
+            <div class="local" style="display: grid;grid-template-columns: 1fr 2fr 1fr">
+                <div class="footer_contacts">
+                <a class="navbar-brand" href="/app" style="color: #3D417B; margin: 0; padding-right: 20px; font-size: 20px;text-decoration: none">HPTender.by</a>
+                <p class="email" style="color: #606060; padding: 15px 0 0 0; margin: 0">info@hptender.by</p>
+                <p class="phone" style="color: #606060; margin: 0">+375293687903</p>
+            </div>
+                <nav class="footer_nav">
+                    <ul class="footer_nav_list" style="display: grid; grid-template-columns: 1fr 1fr; margin: 0; list-style: none">
+                        <li class="footer_nav_list_title" style="color: #606060;font-weight: 500;font-size: 20px;">Разделы
+                            <ul class="footer_inner_list" style="list-style: none; padding: 0">
+                                <li class="footer_list_item"><a href="/search" style="color: #606060;font-size: 16px;text-decoration: none;">Поиск</a></li>
+                                <li class="footer_list_item"><a href="/rates" style="color: #606060;font-size: 16px;text-decoration: none">Тарифы</a></li>
+                            </ul>
+                        </li>
+                        <li class="footer_nav_list_title" style="color: #606060;font-weight: 500;font-size: 20px;" >Документы
+                            <ul class="footer_inner_list" style="list-style: none; padding: 0">
+                                <li class="footer_list_item"><a href="" style="color: #606060;font-size: 16px;text-decoration: none">Уставные документы</a></li>
+                                <li class="footer_list_item"><a href="" style="color: #606060;font-size: 16px;text-decoration: none">Инструкции и регламенты</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </nav>
+                <div class="footer_socials">
+                    <p class="footer_title" style="color: #606060;font-weight: 500;font-size: 20px;margin: 0" >Социальные сети</p>
+                    <div class="footer_socials_icons">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+</div>
+</body>
+</html>

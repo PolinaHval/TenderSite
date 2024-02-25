@@ -52,5 +52,4 @@ public class ApplicationService {
   public void deleteTender(Application application) {
     applicationRepository.delete(application);
   }
-
 }

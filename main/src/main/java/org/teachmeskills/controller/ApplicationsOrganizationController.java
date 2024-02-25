@@ -29,11 +29,12 @@ public class ApplicationsOrganizationController {
     return "myApplications";
   }
 
-  @DeleteMapping("/{applicationId}")
-  protected String deleteApplication(@PathVariable("applicationId") long applicationId) {
+  @DeleteMapping("/{applicationId}/{tenderId}")
+  protected String deleteApplication(@PathVariable("applicationId") long applicationId,
+                                     @PathVariable("tenderId") int tenderId) {
     Application application = applicationService.getApplicationById(applicationId);
     applicationService.deleteTender(application);
-    return "redirect:/myApplications";
+    return "redirect:/tender/" + tenderId;
   }
 
 }
