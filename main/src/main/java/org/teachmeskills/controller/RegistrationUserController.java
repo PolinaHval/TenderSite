@@ -37,13 +37,12 @@ public class RegistrationUserController {
                               final BindingResult result, final  Model model) {
     final Organization organization = registrationUserFacade.getOrganization(organizationId);
     if (!result.hasErrors()) {
-        registrationUserFacade.createUser(createUserDto, organization);
+      registrationUserFacade.createUser(createUserDto, organization);
         return "redirect:/login";
     } else {
       model.addAttribute("organization", organization);
       return "registration";
     }
   }
-
 }
 

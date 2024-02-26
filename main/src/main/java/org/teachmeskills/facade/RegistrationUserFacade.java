@@ -19,7 +19,7 @@ public class RegistrationUserFacade {
     return  organizationService.getOrganizationById(organizationId);
   }
 
-   public void createUser (CreateUserDto createUserDto, Organization organization){
+   public void createUser (CreateUserDto createUserDto, Organization organization) {
     userService.createUser(createUserDto, organization);
    }
 }

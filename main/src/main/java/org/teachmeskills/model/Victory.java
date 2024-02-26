@@ -35,5 +35,4 @@ public class Victory {
   @OneToOne
   @JoinColumn(name = "tender_Id", nullable = false)
   public Tender victoryTender;
-
 }

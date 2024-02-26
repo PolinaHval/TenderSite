@@ -20,7 +20,8 @@ public class SecurityConfig {
   public SecurityFilterChain securityFilterChain(final HttpSecurity http) throws Exception {
     http
         .authorizeHttpRequests((requests) -> requests
-            .antMatchers( "/","/login","/regOrganization", "/registration/**" , "/search", "/reg", "/app","/rates").permitAll()
+            .antMatchers( "/", "/login", "/regOrganization", "/registration/**", "/search", "/reg", "/app",
+                "/rates", "/styles/**", "/images/**").permitAll()
             .antMatchers("/admin/**").hasRole("admin")
             .antMatchers("/users", "/updateUser/**" ).hasRole("mainUser")
             .anyRequest().authenticated()
@@ -41,5 +42,4 @@ public class SecurityConfig {
   public PasswordEncoder passwordEncoder() {
     return new BCryptPasswordEncoder();
   }
-
 }

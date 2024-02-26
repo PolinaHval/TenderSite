@@ -19,7 +19,6 @@ public class MyUser extends User {
   private final long id;
   private final Role role;
 
-
   public MyUser(String username, String password, Collection<? extends GrantedAuthority> authorities,
                 Organization organization, String name, String lastName, String patronymic,
                 String email, String jobTitle, String phone, long id, Role role) {
