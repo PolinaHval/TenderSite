@@ -4,7 +4,6 @@
     <title>Tender</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
     <link href="/styles/tender.css" rel="stylesheet"/>
-
 </head>
 <body>
 <div th:insert="fragments/header.html :: header"/>
@@ -83,6 +82,21 @@
                             <td>Комментарии</td>
                             <td>
                                 <span th:text="${tender.comments}"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Отзыв заявки</td>
+                            <td>
+                                <span th:if="${tender.withdrawalOfApplication.contentEquals('yes')}">Разрешен</span>
+                                <span th:if="${tender.withdrawalOfApplication.contentEquals('no')}">Не разрешен</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Видимость цен между участниками</td>
+                            <td>
+                                <span th:if="${tender.priceVisibility.contentEquals('notRanksAndPrices')}">Цены и ранги недоступны</span>
+                                <span th:if="${tender.priceVisibility.contentEquals('prices')}">Цены</span>
+                                <span th:if="${tender.priceVisibility.contentEquals('ranks')}">Ранги</span>
                             </td>
                         </tr>
                         </tbody>

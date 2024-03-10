@@ -1,9 +1,8 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
-    <title>MyTenders</title>
-
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <title>Мои тендеры</title>
 </head>
 <body>
 <div th:insert="fragments/header.html :: header"/>
@@ -61,7 +60,7 @@
                                 </div>
                             </td>
                             <td class="col-1">
-                                <div th:if="${#authentication.principal.role.id == 2 }">
+                                <div th:if="${#authentication.principal.role.id == 2 and tender.status == true}">
                                     <form th:method="delete"
                                           action="#"
                                           th:action="@{'/myTenders/{id}'(id=${tender.id})}">
@@ -70,7 +69,7 @@
                                 </div>
                             </td>
                             <td class="col-1">
-                                <div th:if="${#authentication.principal.role.id == 2 }">
+                                <div th:if="${#authentication.principal.role.id == 2 and tender.status == true }">
                                     <form th:method="get"
                                           action="#"
                                           th:action="@{'/considerApplications/{tenderId}'(tenderId=${tender.id})}">

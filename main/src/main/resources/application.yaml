@@ -13,7 +13,6 @@ spring:
 
 hashSecret: SECRET
 complexity: 12
-jwtSecret: "SECRET"
 
 
 management:

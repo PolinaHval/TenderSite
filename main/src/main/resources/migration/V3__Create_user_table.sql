@@ -12,9 +12,19 @@ CREATE TABLE users
     phone           VARCHAR   NOT NULL,
     job_title       VARCHAR   NOT NULL
 );
+
 INSERT INTO users (organization_id, role_id , username,  password , name, email, last_name, patronymic, phone, job_title)
 VALUES ((SELECT id
-           FROM organizations
-           WHERE id = 1), (SELECT id
-                           FROM roles
-                           WHERE id = 1), 'Polina','$2a$12$O8u7qZEY9C.Hop6Q7idPDOofFpxYKy5W2O6ijaQt5mNrzXRgdfvWK', 'Полина', 'polina@tander.ru', 'Хваль', 'Сергеевна','545454545', 'Оператор');
+         FROM organizations
+         WHERE id = 1), (SELECT id
+                         FROM roles
+                         WHERE id = 1), 'Polina','$2a$12$O8u7qZEY9C.Hop6Q7idPDOofFpxYKy5W2O6ijaQt5mNrzXRgdfvWK',
+        'Полина', 'polina@phtander.ru', 'Хваль', 'Сергеевна','545454545', 'Оператор');
+
+INSERT INTO users (organization_id, role_id , username,  password , name, email, last_name, patronymic, phone, job_title)
+VALUES ((SELECT id
+         FROM organizations
+         WHERE id = 2), (SELECT id
+                         FROM roles
+                         WHERE id = 2), 'Alina','$2a$12$O8u7qZEY9C.Hop6Q7idPDOofFpxYKy5W2O6ijaQt5mNrzXRgdfvWK',
+        'Алина', 'alina@tander.ru', 'Агаева', 'Витальевна','545454545', 'Директор');
